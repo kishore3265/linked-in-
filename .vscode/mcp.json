@@ -1,0 +1,14 @@
+{
+	"servers": {
+		"Bright Data": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"mcp-remote",
+				"https://mcp.brightdata.com/mcp?token=85f174f6-a78d-4a25-b4b2-f9e1469cbf81"
+			]
+		}
+	},
+	"inputs": []
+}
