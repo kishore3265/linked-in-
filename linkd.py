@@ -294,8 +294,25 @@ class SalesNavigatorScraper:
         if has_sales_nav:
             print("\n✅✅✅ FULL SUCCESS! You can now scrape Sales Navigator! ✅✅✅")
             
-            # Optional: Extract some data
-            response = input("\n🔍 Try extracting sample data? (y/n): ")
+            # Navigate to the target search URL
+            search_url = (
+                "https://www.linkedin.com/sales/search/people"
+                "?query=(recentSearchParam%3A(doLogHistory%3Atrue)%2Cfilters%3AList((type%3ACURRENT_COMPANY"
+                "%2Cvalues%3AList((id%3Aurn%253Ali%253Aorganization%253A66888315%2Ctext%3ANewCo%2520Capital"
+                "%2520Group%2CselectionType%3AINCLUDED)))))"
+                "&sessionId=4EskMkiwQJy%2BYzkxzD03rA%3D%3D&viewAllFilters=true"
+            )
+            print(f"\n🔍 Navigating to target search: NewCo Capital Group...")
+            self.driver.get(search_url)
+            time.sleep(random.uniform(6, 9))
+            
+            current_url = self.driver.current_url
+            print(f"📍 Current URL: {current_url}")
+            self.driver.save_screenshot('search_results.png')
+            print("📸 Screenshot saved as 'search_results.png'")
+            
+            # Optional: Extract data from the search results
+            response = input("\n🔍 Try extracting sample data from results? (y/n): ")
             if response.lower() == 'y':
                 self.extract_sample_data()
         else:
@@ -312,12 +329,17 @@ class SalesNavigatorScraper:
         return True
     
     def extract_sample_data(self):
-        """Extract sample data from Sales Navigator"""
-        print("\n📊 Extracting sample data...")
+        """Extract sample data from Sales Navigator search results"""
+        print("\n📊 Extracting sample data from search results...")
         
         try:
-            # Navigate to search (you can modify this URL)
-            search_url = "https://www.linkedin.com/sales/search/people"
+            search_url = (
+                "https://www.linkedin.com/sales/search/people"
+                "?query=(recentSearchParam%3A(doLogHistory%3Atrue)%2Cfilters%3AList((type%3ACURRENT_COMPANY"
+                "%2Cvalues%3AList((id%3Aurn%253Ali%253Aorganization%253A66888315%2Ctext%3ANewCo%2520Capital"
+                "%2520Group%2CselectionType%3AINCLUDED)))))"
+                "&sessionId=4EskMkiwQJy%2BYzkxzD03rA%3D%3D&viewAllFilters=true"
+            )
             self.driver.get(search_url)
             time.sleep(random.uniform(5, 8))
             
