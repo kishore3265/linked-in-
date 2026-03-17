@@ -310,7 +310,10 @@ class SalesNavigatorScraper:
             print(f"📍 Current URL: {current_url}")
             self.driver.save_screenshot('search_results.png')
             print("📸 Screenshot saved as 'search_results.png'")
-            
+
+            # Save full rendered HTML (Elements panel equivalent)
+            self.save_page_html('search_results.html')
+
             # Optional: Extract data from the search results
             response = input("\n🔍 Try extracting sample data from results? (y/n): ")
             if response.lower() == 'y':
@@ -350,6 +353,9 @@ class SalesNavigatorScraper:
                 )
                 print("✅ Search results loaded")
                 
+                # Save full rendered HTML
+                self.save_page_html('extract_sample_data.html')
+
                 # Take screenshot of results
                 self.driver.save_screenshot('sales_navigator_results.png')
                 print("📸 Results screenshot saved")
@@ -366,6 +372,27 @@ class SalesNavigatorScraper:
             self.driver.quit()
         except:
             pass
+
+    def save_page_html(self, filename=None):
+        """Save the fully rendered DOM (like DevTools Elements panel) to an HTML file"""
+        try:
+            if not filename:
+                timestamp = time.strftime('%Y%m%d_%H%M%S')
+                filename = f'page_source_{timestamp}.html'
+
+            # Get the live rendered DOM (post-JS, same as Elements panel in DevTools)
+            rendered_html = self.driver.execute_script(
+                "return document.documentElement.outerHTML;"
+            )
+
+            with open(filename, 'w', encoding='utf-8') as f:
+                f.write(rendered_html)
+
+            print(f"✅ Full page HTML saved to '{filename}' ({len(rendered_html):,} characters)")
+            return filename
+        except Exception as e:
+            print(f"❌ Failed to save HTML: {e}")
+            return None
 
 # ==================== MAIN EXECUTION ====================
 
