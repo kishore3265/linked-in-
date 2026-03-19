@@ -338,6 +338,96 @@ class SalesNavigatorScraper:
         
         return is_logged_in
     
+    def navigate_to_sales_navigator(self):
+        """
+        Click the 'Go to Sales Navigator' link that appears directly in the
+        left sidebar of the LinkedIn feed page.
+        Falls back to direct URL only if the element cannot be found.
+        """
+        print("\n🖱️  Attempting to navigate to Sales Navigator via UI click...")
+
+        sn_link = None
+
+        # ── CSS selectors targeting the left-sidebar link ─────────────────────
+        # Real DOM: <a href="https://www.linkedin.com/sales"
+        #              class="feed-left-nav-growth-widgets_link ...">
+        #             <span>Go to Sales Navigator</span>
+        #           </a>
+        sn_css_selectors = [
+            'a.feed-left-nav-growth-widgets_link',
+            'a[href="https://www.linkedin.com/sales"]',
+            'a[href*="linkedin.com/sales"]',
+        ]
+
+        for sel in sn_css_selectors:
+            try:
+                els = self.driver.find_elements(By.CSS_SELECTOR, sel)
+                if els:
+                    sn_link = els[0]
+                    print(f"  ✅ Found Sales Navigator link via: {sel}")
+                    break
+            except Exception:
+                continue
+
+        # ── XPath fallback: match by the visible span text ────────────────────
+        if not sn_link:
+            try:
+                sn_link = self.driver.find_element(
+                    By.XPATH,
+                    '//span[normalize-space(text())="Go to Sales Navigator"]/ancestor::a'
+                )
+                print("  ✅ Found Sales Navigator link via XPath text match")
+            except Exception:
+                pass
+
+        # ── Click it ──────────────────────────────────────────────────────────
+        if sn_link:
+            try:
+                original_handles = set(self.driver.window_handles)
+                self.cursor.click_on(sn_link)
+                print("  🖱️  Clicked 'Go to Sales Navigator' link in left sidebar")
+
+                # The link has target="_blank" — it opens in a NEW TAB.
+                # Wait up to 10 s for the new tab to appear, then switch to it.
+                new_handle = None
+                for _ in range(20):
+                    time.sleep(0.5)
+                    current_handles = set(self.driver.window_handles)
+                    diff = current_handles - original_handles
+                    if diff:
+                        new_handle = diff.pop()
+                        break
+
+                if new_handle:
+                    self.driver.switch_to.window(new_handle)
+                    print(f"  🔀 Switched to new tab: {self.driver.current_url}")
+                else:
+                    print("  ⚠️  No new tab detected — may have opened in same tab")
+
+                # Wait for Sales Navigator to fully load
+                try:
+                    WebDriverWait(self.driver, 20).until(
+                        lambda d: "sales" in d.current_url
+                    )
+                    print(f"  ✅ Confirmed on Sales Navigator: {self.driver.current_url}")
+                except Exception:
+                    print(f"  ⚠️  Timed out waiting for sales URL, current: {self.driver.current_url}")
+
+                time.sleep(random.uniform(3, 5))
+                self.inject_cursor_overlay()
+                self.human_idle(2, 3)
+                return True
+            except Exception as e:
+                print(f"  ⚠️  click_on failed: {e}")
+
+        # ── Fallback: direct URL ───────────────────────────────────────────────
+        print("  ⚠️  UI navigation failed — falling back to direct URL")
+        self.driver.get("https://www.linkedin.com/sales/home")
+        time.sleep(random.uniform(5, 8))
+        self.inject_cursor_overlay()
+        self.human_idle(2, 3)
+        return False
+
     def verify_sales_navigator_access(self):
         """Check if user has Sales Navigator access"""
         print("\n" + "="*60)
@@ -419,11 +509,9 @@ class SalesNavigatorScraper:
         
         print("\n✅ Successfully connected to regular LinkedIn!")
         
-        # Step 4: Automatically navigate to Sales Navigator
-        print("\n🚀 Navigating to Sales Navigator...")
-        self.driver.get("https://www.linkedin.com/sales/home")
-        time.sleep(random.uniform(5, 8))
-        self.inject_cursor_overlay()
+        # Step 4: Navigate to Sales Navigator by clicking through the UI
+        print("\n🚀 Navigating to Sales Navigator via UI clicks...")
+        self.navigate_to_sales_navigator()
         print("🖱️  Simulating human exploring Sales Navigator home...")
         self.human_idle(2, 4)
         self.human_scroll('down', random.randint(1, 3))
