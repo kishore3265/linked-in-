@@ -1087,120 +1087,167 @@ class SalesNavigatorScraper:
         _scroll_top()
         time.sleep(random.uniform(0.5, 1.0))
 
+    def _is_element_in_viewport(self, element) -> bool:
+        """
+        Returns True if the element's bounding rect is fully inside
+        the visible browser viewport (no part is clipped off-screen).
+        """
+        try:
+            rect = self.driver.execute_script("""
+                var el = arguments[0];
+                var r  = el.getBoundingClientRect();
+                return {top: r.top, left: r.left, bottom: r.bottom, right: r.right};
+            """, element)
+            vh = self.driver.execute_script("return window.innerHeight")
+            vw = self.driver.execute_script("return window.innerWidth")
+            return (
+                rect['top']    >= 0 and
+                rect['left']   >= 0 and
+                rect['bottom'] <= vh and
+                rect['right']  <= vw
+            )
+        except Exception:
+            return False
+
+    def _scroll_until_next_visible(self, next_selectors, max_scrolls=15) -> object:
+        """
+        Scroll the page DOWN in increments until the Next button is visible
+        inside the viewport.  Returns the fresh element once visible, or None
+        if the button never appears after max_scrolls attempts.
+
+        This guarantees HumanCursor always gets an on-screen target, preventing
+        MoveTargetOutOfBoundsException.
+        """
+        print("  🔽 Scrolling down until Next button is visible in viewport...")
+
+        for attempt in range(1, max_scrolls + 1):
+            # Re-fetch on every iteration to avoid stale references
+            btn = None
+            for sel in next_selectors:
+                try:
+                    els = self.driver.find_elements(By.CSS_SELECTOR, sel)
+                    if els and els[0].is_enabled():
+                        btn = els[0]
+                        break
+                except Exception:
+                    continue
+
+            if btn is None:
+                # XPath fallback — matches the real DOM:
+                #   <button ...><span class="artdeco-button__text">Next</span></button>
+                try:
+                    btn = self.driver.find_element(
+                        By.XPATH,
+                        '//button[@aria-label="Next" or '
+                        './/span[contains(@class,"artdeco-button__text") and normalize-space(text())="Next"]]'
+                    )
+                except Exception:
+                    pass
+
+            if btn is not None and self._is_element_in_viewport(btn):
+                print(f"  ✅ Next button visible in viewport after {attempt} scroll(s)")
+                return btn
+
+            # Not visible yet — scroll down a bit and retry
+            scroll_px = random.randint(200, 400)
+            self.driver.execute_script(f"window.scrollBy(0, {scroll_px});")
+            print(f"  ↓ Scroll attempt {attempt}/{max_scrolls} (+{scroll_px}px)...")
+            time.sleep(random.uniform(0.6, 1.1))
+
+        print(f"  ⚠️  Next button not visible after {max_scrolls} scroll attempts")
+        return None
+
     def _click_next_page(self):
         """
-        Click the Next page button on Sales Navigator search results using
-        cursor.click_on() for human-like movement.
+        Scroll DOWN until the Next page button enters the visible viewport,
+        then click it with HumanCursor (JS fallback if cursor fails).
         Returns True if the next page loaded, False if no Next button found.
         """
-        next_btn = None
-
-        # Standard Sales Navigator pagination — 'Next' button
+        # Standard Sales Navigator pagination selectors
+        # Derived from the real DOM:
+        #   <button aria-label="Next"
+        #           class="... artdeco-pagination_button artdeco-pagination_button--next ...">
+        #     <span class="artdeco-button__text">Next</span>
+        #   </button>
+        # NOTE: single underscore  artdeco-pagination_button  (NOT double __)
         next_selectors = [
-            'button[aria-label="Next"]',
-            'button[aria-label="next"]',
-            '[data-test-pagination-page-btn="next"]',
-            'button.artdeco-pagination__button--next',
+            'button[aria-label="Next"]',                       # most reliable — aria label
+            'button.artdeco-pagination_button--next',          # real class (single underscore)
+            'button.artdeco-pagination_button[aria-label]',    # pagination btn with any aria
+            '[data-test-pagination-page-btn="next"]',          # test-id fallback
+            'button.artdeco-pagination__button--next',         # legacy double-underscore variant
         ]
 
-        for sel in next_selectors:
-            try:
-                els = self.driver.find_elements(By.CSS_SELECTOR, sel)
-                if els and els[0].is_enabled():
-                    next_btn = els[0]
-                    print(f"  ✅ Found Next button via: {sel}")
-                    break
-            except Exception:
-                continue
+        # ── Step 1: Scroll down until the Next button is visible ─────────────
+        # Keep scrolling in a loop; only stop when the button's bounding rect
+        # is fully inside the viewport.  This guarantees HumanCursor can draw
+        # a valid trajectory to it without MoveTargetOutOfBoundsException.
+        visible_btn = self._scroll_until_next_visible(next_selectors)
 
-        if not next_btn:
-            try:
-                next_btn = self.driver.find_element(
-                    By.XPATH,
-                    '//button[normalize-space(.)="Next" or @aria-label="Next"]'
-                )
-                print("  ✅ Found Next button via XPath")
-            except Exception:
-                pass
+        if visible_btn is None:
+            print("  ℹ️  No Next button found — likely on the last page")
+            return False
 
-        if next_btn:
-            try:
-                current_url = self.driver.current_url
+        try:
+            current_url = self.driver.current_url
 
-                # ── Scroll the button fully into the visible viewport ─────────
-                # This prevents HumanCursor's MoveTargetOutOfBoundsException which
-                # happens when the target element is outside the viewport bounds.
-                self.driver.execute_script(
-                    "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                    next_btn
-                )
-                time.sleep(random.uniform(0.6, 1.2))
-
-                # ── Re-fetch the button right before clicking ─────────────────
-                # After the scroll LinkedIn's React layer may re-render, making
-                # the old element reference stale.  Re-query to get a fresh node.
-                fresh_btn = None
-                for sel in next_selectors:
-                    try:
-                        els = self.driver.find_elements(By.CSS_SELECTOR, sel)
-                        if els and els[0].is_enabled():
-                            fresh_btn = els[0]
-                            break
-                    except Exception:
-                        continue
-                if fresh_btn is None:
-                    fresh_btn = next_btn  # fall back to original if re-fetch fails
-
-                # Scroll the fresh reference into center as well
-                self.driver.execute_script(
-                    "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                    fresh_btn
-                )
-                time.sleep(random.uniform(0.3, 0.6))
-
-                # ── Primary click: HumanCursor ─────────────────────────────────
-                click_ok = False
+            # ── Step 2: Re-fetch one final time right before clicking ─────────
+            # The scrolling may have triggered a React re-render, so re-query
+            # to get the absolute freshest DOM reference before the click.
+            fresh_btn = None
+            for sel in next_selectors:
                 try:
-                    self.cursor.click_on(fresh_btn)
-                    click_ok = True
-                    print("  🖱️  Clicked Next page button (human cursor)")
-                except Exception as ce:
-                    print(f"  ⚠️  cursor.click_on failed ({ce}) — trying JS click")
-
-                # ── Fallback click: JavaScript ─────────────────────────────────
-                if not click_ok:
-                    try:
-                        self.driver.execute_script("arguments[0].click();", fresh_btn)
-                        click_ok = True
-                        print("  🖱️  Clicked Next page button (JS fallback)")
-                    except Exception as je:
-                        print(f"  ⚠️  JS click also failed: {je}")
-
-                if not click_ok:
-                    print("  ⚠️  All click strategies failed for Next button")
-                    return False
-
-                # ── Wait for the page to advance ───────────────────────────────
-                # Sales Navigator may update the URL (page param) or just swap
-                # the results panel in-place without a URL change.  We wait for
-                # either the URL to change OR the results panel to go stale and
-                # reload (detected via a brief staleness check).
-                try:
-                    WebDriverWait(self.driver, 15).until(
-                        lambda d: d.current_url != current_url
-                    )
-                    print(f"  ✅ New page loaded: {self.driver.current_url}")
+                    els = self.driver.find_elements(By.CSS_SELECTOR, sel)
+                    if els and els[0].is_enabled():
+                        fresh_btn = els[0]
+                        break
                 except Exception:
-                    # URL did not change — SPA in-place update; wait a moment for
-                    # the results panel to re-render
-                    print("  ℹ️  URL unchanged — waiting for results panel to refresh...")
-                    time.sleep(random.uniform(3, 5))
+                    continue
+            if fresh_btn is None:
+                fresh_btn = visible_btn  # fallback to what we already have
 
-                time.sleep(random.uniform(2, 4))
-                self.inject_cursor_overlay()
-                return True
-            except Exception as e:
-                print(f"  ⚠️  Next button click failed: {e}")
+            # Short pause so the page settles after scrolling
+            time.sleep(random.uniform(0.4, 0.8))
+
+            # ── Step 3: Primary click — HumanCursor ───────────────────────────
+            click_ok = False
+            try:
+                self.cursor.click_on(fresh_btn)
+                click_ok = True
+                print("  🖱️  Clicked Next page button (human cursor)")
+            except Exception as ce:
+                print(f"  ⚠️  cursor.click_on failed ({ce}) — trying JS click")
+
+            # ── Step 4: Fallback click — JavaScript ───────────────────────────
+            if not click_ok:
+                try:
+                    self.driver.execute_script("arguments[0].click();", fresh_btn)
+                    click_ok = True
+                    print("  🖱️  Clicked Next page button (JS fallback)")
+                except Exception as je:
+                    print(f"  ⚠️  JS click also failed: {je}")
+
+            if not click_ok:
+                print("  ⚠️  All click strategies failed for Next button")
+                return False
+
+            # ── Step 5: Wait for the page to advance ──────────────────────────
+            try:
+                WebDriverWait(self.driver, 15).until(
+                    lambda d: d.current_url != current_url
+                )
+                print(f"  ✅ New page loaded: {self.driver.current_url}")
+            except Exception:
+                # SPA in-place update — URL stays the same, results panel swaps
+                print("  ℹ️  URL unchanged — waiting for results panel to refresh...")
+                time.sleep(random.uniform(3, 5))
+
+            time.sleep(random.uniform(2, 4))
+            self.inject_cursor_overlay()
+            return True
+
+        except Exception as e:
+            print(f"  ⚠️  Next button click failed: {e}")
 
         print("  ℹ️  No Next button found — likely on the last page")
         return False
