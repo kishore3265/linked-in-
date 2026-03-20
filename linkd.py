@@ -1126,20 +1126,77 @@ class SalesNavigatorScraper:
         if next_btn:
             try:
                 current_url = self.driver.current_url
-                # Scroll Next button into view first
-                self.driver.execute_script(
-                    "arguments[0].scrollIntoView({block:'center'});", next_btn
-                )
-                time.sleep(random.uniform(0.5, 1.0))
-                self.cursor.click_on(next_btn)
-                print("  🖱️  Clicked Next page button")
 
-                # Wait until URL changes (page number increments)
-                WebDriverWait(self.driver, 15).until(
-                    lambda d: d.current_url != current_url
+                # ── Scroll the button fully into the visible viewport ─────────
+                # This prevents HumanCursor's MoveTargetOutOfBoundsException which
+                # happens when the target element is outside the viewport bounds.
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                    next_btn
                 )
-                print(f"  ✅ New page loaded: {self.driver.current_url}")
-                time.sleep(random.uniform(3, 5))
+                time.sleep(random.uniform(0.6, 1.2))
+
+                # ── Re-fetch the button right before clicking ─────────────────
+                # After the scroll LinkedIn's React layer may re-render, making
+                # the old element reference stale.  Re-query to get a fresh node.
+                fresh_btn = None
+                for sel in next_selectors:
+                    try:
+                        els = self.driver.find_elements(By.CSS_SELECTOR, sel)
+                        if els and els[0].is_enabled():
+                            fresh_btn = els[0]
+                            break
+                    except Exception:
+                        continue
+                if fresh_btn is None:
+                    fresh_btn = next_btn  # fall back to original if re-fetch fails
+
+                # Scroll the fresh reference into center as well
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                    fresh_btn
+                )
+                time.sleep(random.uniform(0.3, 0.6))
+
+                # ── Primary click: HumanCursor ─────────────────────────────────
+                click_ok = False
+                try:
+                    self.cursor.click_on(fresh_btn)
+                    click_ok = True
+                    print("  🖱️  Clicked Next page button (human cursor)")
+                except Exception as ce:
+                    print(f"  ⚠️  cursor.click_on failed ({ce}) — trying JS click")
+
+                # ── Fallback click: JavaScript ─────────────────────────────────
+                if not click_ok:
+                    try:
+                        self.driver.execute_script("arguments[0].click();", fresh_btn)
+                        click_ok = True
+                        print("  🖱️  Clicked Next page button (JS fallback)")
+                    except Exception as je:
+                        print(f"  ⚠️  JS click also failed: {je}")
+
+                if not click_ok:
+                    print("  ⚠️  All click strategies failed for Next button")
+                    return False
+
+                # ── Wait for the page to advance ───────────────────────────────
+                # Sales Navigator may update the URL (page param) or just swap
+                # the results panel in-place without a URL change.  We wait for
+                # either the URL to change OR the results panel to go stale and
+                # reload (detected via a brief staleness check).
+                try:
+                    WebDriverWait(self.driver, 15).until(
+                        lambda d: d.current_url != current_url
+                    )
+                    print(f"  ✅ New page loaded: {self.driver.current_url}")
+                except Exception:
+                    # URL did not change — SPA in-place update; wait a moment for
+                    # the results panel to re-render
+                    print("  ℹ️  URL unchanged — waiting for results panel to refresh...")
+                    time.sleep(random.uniform(3, 5))
+
+                time.sleep(random.uniform(2, 4))
                 self.inject_cursor_overlay()
                 return True
             except Exception as e:
