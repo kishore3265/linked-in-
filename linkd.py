@@ -343,11 +343,6 @@ class SalesNavigatorScraper:
 
         sn_link = None
 
-        # ── CSS selectors targeting the left-sidebar link ─────────────────────
-        # Real DOM: <a href="https://www.linkedin.com/sales"
-        #              class="feed-left-nav-growth-widgets_link ...">
-        #             <span>Go to Sales Navigator</span>
-        #           </a>
         sn_css_selectors = [
             'a.feed-left-nav-growth-widgets_link',
             'a[href="https://www.linkedin.com/sales"]',
@@ -792,7 +787,7 @@ class SalesNavigatorScraper:
 
         # Step 6: Type company name in the company filter input and select suggestion
         if has_sales_nav:
-            self.enter_company_filter("serviceocean AG")
+            self.enter_company_filter("ZIX Corporation")
 
         if has_sales_nav:
             print("\n FULL SUCCESS! You can now scrape Sales Navigator !")
@@ -806,12 +801,12 @@ class SalesNavigatorScraper:
             leads = self.scrape_search_results(
                 search_url=current_search_url,
                 max_pages=5,
-                output_file='newco_capital_leads.json'
+                output_file='zix_corporation_leads.json'
             )
 
             if leads:
                 print(f"\n🎉 Scraped {len(leads)} leads total!")
-                print("📁 Files saved: newco_capital_leads.json + newco_capital_leads.csv")
+                print("📁 Files saved: zix_corporation_leads.json + zix_corporation_leads.csv")
             else:
                 # Fallback: save raw HTML for manual inspection
                 self.save_page_html('search_results.html')
@@ -931,20 +926,92 @@ class SalesNavigatorScraper:
             print(f"✅ Found {len(page_leads)} leads on page {page}")
             all_leads.extend(page_leads)
 
-            # Stop if we've hit the max or there is no next page
+            # Stop if we've hit the max pages limit
             if page >= max_pages:
+                print(f"🏁 Reached max pages ({max_pages}) — done.")
                 break
 
-            # Human pause then click Next
-            wait = random.uniform(3, 6)
-            print(f"⏳ Waiting {wait:.1f}s before next page...")
+            # ── Step 1: Scroll down and locate the Next button ────────────────
+            # Do this BEFORE asking the user so we know there IS a next page.
+            next_selectors = [
+                'button[aria-label="Next"]',
+                'button.artdeco-pagination_button--next',
+                'button.artdeco-pagination_button[aria-label]',
+                '[data-test-pagination-page-btn="next"]',
+                'button.artdeco-pagination__button--next',
+            ]
+            print("\n🔍 Looking for Next button after scraping page...")
+            located_next_btn = self._scroll_until_next_visible(next_selectors)
+
+            if located_next_btn is None:
+                print("🏁 Next button not found — this is the last page.")
+                break
+
+            print("✅ Next button is visible on page.")
+
+            # ── Step 2: Ask user for confirmation ─────────────────────────────
+            print(f"\n{'─'*50}")
+            print(f"📄 Page {page} scraped  ({len(page_leads)} leads, {len(all_leads)} total so far)")
+            print(f"{'─'*50}")
+            try:
+                user_input = input("➡️  Type 'yes' (or 'y') to CLICK Next and scrape the next page, or anything else to STOP: ").strip().lower()
+            except (EOFError, KeyboardInterrupt):
+                user_input = ''
+
+            if user_input not in ('yes', 'y'):
+                print("🛑 Stopping at user request.")
+                break
+
+            # ── Step 3: Click the already-located Next button ─────────────────
+            wait = random.uniform(2, 4)
+            print(f"⏳ Waiting {wait:.1f}s before clicking Next...")
             self.human_idle(1, 2)
             time.sleep(wait)
 
-            if not self._click_next_page():
-                print("🏁 No more pages — done.")
+            # Re-fetch in case React re-rendered after the wait
+            fresh_btn = None
+            for sel in next_selectors:
+                try:
+                    els = self.driver.find_elements(By.CSS_SELECTOR, sel)
+                    if els and els[0].is_enabled():
+                        fresh_btn = els[0]
+                        break
+                except Exception:
+                    continue
+            if fresh_btn is None:
+                fresh_btn = located_next_btn  # fallback to the one we scrolled to
+
+            current_url = self.driver.current_url
+            click_ok = False
+            try:
+                self.cursor.click_on(fresh_btn)
+                click_ok = True
+                print("  🖱️  Clicked Next page button (human cursor)")
+            except Exception as ce:
+                print(f"  ⚠️  cursor.click_on failed ({ce}) — trying JS click")
+                try:
+                    self.driver.execute_script("arguments[0].click();", fresh_btn)
+                    click_ok = True
+                    print("  🖱️  Clicked Next page button (JS fallback)")
+                except Exception as je:
+                    print(f"  ⚠️  JS click also failed: {je}")
+
+            if not click_ok:
+                print("  ⚠️  All click strategies failed — stopping.")
                 break
 
+            # Wait for next page to load
+            try:
+                WebDriverWait(self.driver, 15).until(
+                    lambda d: d.current_url != current_url
+                )
+                print(f"  ✅ New page loaded: {self.driver.current_url}")
+            except Exception:
+                print("  ℹ️  URL unchanged — waiting for results panel to refresh...")
+                time.sleep(random.uniform(3, 5))
+
+            time.sleep(random.uniform(2, 4))
+            self.inject_cursor_overlay()
             page += 1
 
         # ── Save results ──────────────────────────────────────────────
@@ -1031,16 +1098,27 @@ class SalesNavigatorScraper:
         else:
             print("  ⚠️  Scrollable panel not found — falling back to window scroll")
 
-        # ── Step 4: scroll to the bottom, waiting for lazy loads ─────────────
-        scroll_attempts  = 0
-        max_scroll_attempts = 25
+        # ── Step 4: gradually scroll to the bottom so every card lazy-loads ────
+        # IMPORTANT: Never jump/teleport — Sales Navigator lazy-loads cards only
+        # when the viewport scrolls past them.  A forced scrollTop = scrollHeight
+        # skips all intermediate cards and loses data.  Always use scrollBy.
+        scroll_attempts = 0
+        max_scroll_attempts = 20   # generous — up to ~80 small steps
+        stable_count = 0           # consecutive checks where height did NOT grow
+        STABLE_THRESHOLD = 3       # declare bottom only after 3 stable checks in a row
 
-        def _get_height():
+        def _get_pos():
+            """Returns [scrollTop, clientHeight, scrollHeight]."""
             if scroll_panel:
                 return self.driver.execute_script(
-                    "return arguments[0].scrollHeight", scroll_panel
+                    "return [arguments[0].scrollTop, "
+                    "arguments[0].clientHeight, "
+                    "arguments[0].scrollHeight];",
+                    scroll_panel
                 )
-            return self.driver.execute_script("return document.body.scrollHeight")
+            return self.driver.execute_script(
+                "return [window.pageYOffset, window.innerHeight, document.body.scrollHeight];"
+            )
 
         def _scroll_down(px):
             if scroll_panel:
@@ -1056,36 +1134,66 @@ class SalesNavigatorScraper:
             else:
                 self.driver.execute_script("window.scrollTo(0, 0);")
 
-        last_height = _get_height()
+        def _at_bottom(st, ch, sh, tolerance=60):
+            return (st + ch) >= (sh - tolerance)
+
+        st, ch, sh = _get_pos()
+        last_height = sh
+        print(f"  ↓ Start: scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
 
         while scroll_attempts < max_scroll_attempts:
-            scroll_px = random.randint(300, 550)
+            # Scroll down by a small human-like chunk
+            scroll_px = random.randint(200, 380)
             _scroll_down(scroll_px)
-            time.sleep(random.uniform(0.8, 1.6))
+            time.sleep(random.uniform(0.7, 1.4))
 
-            # Occasionally re-hover a card so the panel keeps focus
-            if random.random() < 0.4 and lead_card:
+            # Occasionally re-hover a card so the panel keeps receiving events
+            if random.random() < 0.35 and lead_card:
                 try:
                     self.cursor.move_to(lead_card)
-                    time.sleep(random.uniform(0.2, 0.5))
+                    time.sleep(random.uniform(0.2, 0.4))
                 except Exception:
                     pass
 
-            new_height = _get_height()
-            if new_height == last_height:
-                # Give lazy-loading extra time
-                time.sleep(random.uniform(2.0, 3.0))
-                new_height = _get_height()
-                if new_height == last_height:
-                    print(f"  ↳ Reached bottom after {scroll_attempts} scrolls")
-                    break
-
-            last_height = new_height
+            st, ch, sh = _get_pos()
             scroll_attempts += 1
+            print(f"  ↓ Scroll {scroll_attempts}: scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
 
-        # Return to top of panel before extraction
+            # Check whether new content appeared
+            if sh > last_height:
+                # New cards lazy-loaded — reset stable counter and keep going
+                stable_count = 0
+                last_height = sh
+                continue
+
+            # Height did not grow this step
+            stable_count += 1
+
+            if _at_bottom(st, ch, sh):
+                if stable_count >= STABLE_THRESHOLD:
+                    # Truly at the bottom and no new content for several steps
+                    print(f"  ↳ Reached true bottom after {scroll_attempts} scrolls "
+                          f"(stable×{stable_count}, scrollTop+clientH={int(st+ch)}, scrollH={int(sh)})")
+                    break
+                else:
+                    # At bottom but give lazy-load more time before declaring done
+                    print(f"  ↓ At bottom edge — waiting for lazy-load (stable×{stable_count})...")
+                    time.sleep(random.uniform(2.0, 3.0))
+            else:
+                # Not at bottom yet but height is stable — wait a bit and retry
+                if stable_count >= STABLE_THRESHOLD:
+                    print(f"  ↓ Height stable for {stable_count} steps — extra wait for lazy-load...")
+                    time.sleep(random.uniform(2.5, 4.0))
+                    _, _, sh_new = _get_pos()
+                    if sh_new == last_height:
+                        # Still nothing new — keep scrolling normally
+                        stable_count = 0
+
+        # Return to top AFTER full scroll so parser gets the complete DOM
         _scroll_top()
-        time.sleep(random.uniform(0.5, 1.0))
+        time.sleep(random.uniform(0.8, 1.2))
+        st2, ch2, sh2 = _get_pos()
+        print(f"  ✅ Scroll complete — scrollH={int(sh2)}, back at top (scrollTop={int(st2)})")
 
     def _is_element_in_viewport(self, element) -> bool:
         """
