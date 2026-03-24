@@ -1209,11 +1209,8 @@ class SalesNavigatorScraper:
                         # Still nothing new — keep scrolling normally
                         stable_count = 0
 
-        # Return to top AFTER full scroll so parser gets the complete DOM
-        _scroll_top()
-        time.sleep(random.uniform(0.8, 1.2))
         st2, ch2, sh2 = _get_pos()
-        print(f"  ✅ Scroll complete — scrollH={int(sh2)}, back at top (scrollTop={int(st2)})")
+        print(f"  ✅ Scroll complete — scrollH={int(sh2)}, staying at bottom (scrollTop={int(st2)})")
 
     def _is_element_in_viewport(self, element) -> bool:
         """
