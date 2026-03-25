@@ -781,32 +781,43 @@ class SalesNavigatorScraper:
         time.sleep(random.uniform(1, 2))
         has_sales_nav = self.verify_sales_navigator_access()
 
-        # Step 5: Click 'Lead filters' to navigate to the people search page
+        # Step 5: Click 'Lead filters' to navigate to the search page
         if has_sales_nav:
             self.click_lead_filters()
 
-        # Step 6: Type company name in the company filter input and select suggestion
         if has_sales_nav:
-            self.enter_company_filter("ZIX Corporation")
+            # ── Wait for user to apply filters manually, then confirm ──────────
+            print("\n" + "="*60)
+            print("⏸️  FILTERS PAGE IS OPEN — apply your filters in the browser now")
+            print("="*60)
+            print("   • Type the company name, set headcount, location, etc.")
+            print("   • Once the results are showing, come back here.")
+            print("   • Type  'y'  and press Enter to START scraping.")
+            print("   • Type anything else to CANCEL.")
+            print("="*60)
+            try:
+                go = input("▶️  Start scrape? [y/N]: ").strip().lower()
+            except (EOFError, KeyboardInterrupt):
+                go = ''
 
-        if has_sales_nav:
-            print("\n FULL SUCCESS! You can now scrape Sales Navigator !")
+            if go not in ('y', 'yes'):
+                print("🛑 Scrape cancelled by user.")
+                input("\nPress Enter to close browser...")
+                self.cleanup()
+                return False
 
-            # Use the current URL (fresh session, valid sessionId) instead of
-            # any hardcoded/old URL — avoids LinkedIn redirecting back to feed
-            # due to an expired sessionId.
             current_search_url = self.driver.current_url
             print(f"🔗 Using live search URL: {current_search_url}")
 
             leads = self.scrape_search_results(
                 search_url=current_search_url,
-                max_pages=5,
-                output_file='zix_corporation_leads.json'
+                max_pages=20,
+                output_file='scraped_leads.json'
             )
 
             if leads:
-                print(f"\n🎉 Scraped {len(leads)} leads total!")
-                print("📁 Files saved: zix_corporation_leads.json + zix_corporation_leads.csv")
+                print(f"\n🎉 Scraped {len(leads)} companies total!")
+                print("📁 Files saved: scraped_leads.json + scraped_leads.csv")
             else:
                 # Fallback: save raw HTML for manual inspection
                 self.save_page_html('search_results.html')
@@ -857,7 +868,7 @@ class SalesNavigatorScraper:
         except Exception as e:
             print(f"❌ Data extraction failed: {e}")
     
-    def scrape_search_results(self, search_url, max_pages=5, output_file='scraped_leads.json'):
+    def scrape_search_results(self, search_url, max_pages=20, output_file='scraped_leads.json'):
         """
         Navigate to a Sales Navigator search URL, scroll through results,
         scrape all lead data across multiple pages, and save to JSON + CSV.
@@ -893,11 +904,14 @@ class SalesNavigatorScraper:
         while page <= max_pages:
             print(f"\n📄 Scraping page {page}/{max_pages}...")
 
-            # Wait for results panel to be present
+            # Wait for results panel to be present (lead search OR account/company search)
             try:
                 WebDriverWait(self.driver, 20).until(
                     EC.presence_of_element_located(
-                        (By.CSS_SELECTOR, '[data-sn-view-name="module-lead-search-results"]')
+                        (By.CSS_SELECTOR,
+                         '[data-sn-view-name="module-lead-search-results"],'
+                         '[data-sn-view-name="module-account-search-results"],'
+                         '.search-results__results-container')
                     )
                 )
                 print("✅ Results panel loaded")
@@ -948,21 +962,9 @@ class SalesNavigatorScraper:
                 break
 
             print("✅ Next button is visible on page.")
+            print(f"\n📄 Page {page} scraped  ({len(page_leads)} leads, {len(all_leads)} total so far) — auto-advancing...")
 
-            # ── Step 2: Ask user for confirmation ─────────────────────────────
-            print(f"\n{'─'*50}")
-            print(f"📄 Page {page} scraped  ({len(page_leads)} leads, {len(all_leads)} total so far)")
-            print(f"{'─'*50}")
-            try:
-                user_input = input("➡️  Type 'yes' (or 'y') to CLICK Next and scrape the next page, or anything else to STOP: ").strip().lower()
-            except (EOFError, KeyboardInterrupt):
-                user_input = ''
-
-            if user_input not in ('yes', 'y'):
-                print("🛑 Stopping at user request.")
-                break
-
-            # ── Step 3: Click the already-located Next button ─────────────────
+            # ── Step 2: Click the already-located Next button ─────────────────
             wait = random.uniform(2, 4)
             print(f"⏳ Waiting {wait:.1f}s before clicking Next...")
             self.human_idle(1, 2)
@@ -1025,7 +1027,7 @@ class SalesNavigatorScraper:
 
             # CSV
             csv_file = output_file.replace('.json', '.csv')
-            fieldnames = ['name', 'title', 'location', 'company', 'metadata', 'profile_url']
+            fieldnames = ['company_name', 'company_url', 'industry', 'employee_count']
             with open(csv_file, 'w', newline='', encoding='utf-8') as f:
                 writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
                 writer.writeheader()
@@ -1051,17 +1053,20 @@ class SalesNavigatorScraper:
         """
         print("  📜 Scrolling right results panel to bottom (lazy-load)...")
 
-        # ── Step 1: locate first lead card link ──────────────────────────────
+        # ── Step 1: locate first visible card link (company OR people card) ─────
         lead_card = None
-        try:
-            lead_card = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((
-                    By.CSS_SELECTOR,
-                    'a[data-control-name="view_lead_panel_via_search_lead_name"]'
-                ))
-            )
-        except Exception:
-            pass
+        for card_sel in [
+            'a[data-control-name="view_company_via_result_name"]',      # company/account card
+            'a[data-control-name="view_lead_panel_via_search_lead_name"]',  # people/lead card
+        ]:
+            try:
+                lead_card = WebDriverWait(self.driver, 6).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, card_sel))
+                )
+                print(f"  ✅ Scroll anchor found via: {card_sel}")
+                break
+            except Exception:
+                continue
 
         # ── Step 2: move cursor to the right-side panel, vertically centred ──
         # Sales Navigator is a split-pane layout: the RIGHT half is the
@@ -1378,49 +1383,86 @@ class SalesNavigatorScraper:
         return False
 
     def _extract_leads_from_soup(self, soup):
-        """Parse BeautifulSoup HTML and extract lead data from result cards"""
+        """
+        Parse BeautifulSoup HTML and extract company data from account search result cards.
+
+        Each card yields:
+          company_name    – display name of the company
+          company_url     – full Sales Navigator company profile URL
+          industry        – industry label (e.g. "Information Technology & Services")
+          employee_count  – integer employee count parsed from the aria-label
+                            (e.g. "View all 122 employees …" → 122), or '' if unavailable
+        """
+        import re
         leads = []
 
-        # Find all name links — each is one person result
-        name_links = soup.find_all(
+        # ── Anchor: every company card has this data-control-name ─────────────
+        # <a data-control-name="view_company_via_result_name"
+        #    href="/sales/company/70292136?...">Stier Solutions Inc</a>
+        company_links = soup.find_all(
             'a',
-            attrs={'data-control-name': 'view_lead_panel_via_search_lead_name'}
+            attrs={'data-control-name': 'view_company_via_result_name'}
         )
 
-        for link in name_links:
-            lead = {}
+        for link in company_links:
+            record = {}
 
-            # ── Name ──────────────────────────────────────
-            lead['name'] = link.get_text(strip=True)
+            # ── Company name ──────────────────────────────────────────────────
+            record['company_name'] = link.get_text(strip=True)
 
-            # ── Profile URL ───────────────────────────────
+            # ── Company URL ───────────────────────────────────────────────────
             href = link.get('href', '')
-            lead['profile_url'] = f"https://www.linkedin.com{href}" if href.startswith('/') else href
+            # Strip query-string noise so the URL is clean but still valid
+            base_href = href.split('?')[0]
+            record['company_url'] = (
+                f"https://www.linkedin.com{base_href}"
+                if base_href.startswith('/')
+                else base_href
+            )
 
-            # ── Walk up to the lockup content container ───
-            # Structure: a[name] → div.__title → div.__content → div[lockup]
-            content_div = link.find_parent(class_='artdeco-entity-lockup__content')
+            # ── Walk up to the lockup content container ───────────────────────
+            # Sales Navigator uses single-underscore BEM:
+            #   artdeco-entity-lockup_content  (NOT double-underscore)
+            # Try both variants for robustness.
+            content_div = (
+                link.find_parent(class_='artdeco-entity-lockup_content')
+                or link.find_parent(class_='artdeco-entity-lockup__content')
+            )
+
+            record['industry'] = ''
+            record['employee_count'] = ''
 
             if content_div:
-                # Title / Role
-                subtitle = content_div.find(class_='artdeco-entity-lockup__subtitle')
-                lead['title'] = subtitle.get_text(separator=' ', strip=True) if subtitle else ''
+                # subtitle div holds industry span + employee-count link
+                subtitle = (
+                    content_div.find(class_='artdeco-entity-lockup_subtitle')
+                    or content_div.find(class_='artdeco-entity-lockup__subtitle')
+                )
 
-                # Location
-                caption = content_div.find(class_='artdeco-entity-lockup__caption')
-                lead['location'] = caption.get_text(separator=' ', strip=True) if caption else ''
+                if subtitle:
+                    # ── Industry ──────────────────────────────────────────────
+                    industry_span = subtitle.find(
+                        'span', attrs={'data-anonymize': 'industry'}
+                    )
+                    if industry_span:
+                        record['industry'] = industry_span.get_text(strip=True)
 
-                # Company / extra metadata
-                metadata = content_div.find(class_='artdeco-entity-lockup__metadata')
-                lead['company'] = metadata.get_text(separator=' ', strip=True) if metadata else ''
-            else:
-                lead['title'] = ''
-                lead['location'] = ''
-                lead['company'] = ''
+                    # ── Employee count ────────────────────────────────────────
+                    # <a data-anonymize="company-size"
+                    #    aria-label="View all 122 employees at … on LinkedIn">
+                    emp_link = subtitle.find(
+                        'a', attrs={'data-anonymize': 'company-size'}
+                    )
+                    if emp_link:
+                        aria = emp_link.get('aria-label', '')
+                        # Extract the first integer found in the aria-label
+                        match = re.search(r'(\d[\d,]*)', aria)
+                        if match:
+                            record['employee_count'] = int(match.group(1).replace(',', ''))
 
-            # Only add if we got at least a name
-            if lead['name']:
-                leads.append(lead)
+            # Only add if we got at least a company name
+            if record['company_name']:
+                leads.append(record)
 
         return leads
 

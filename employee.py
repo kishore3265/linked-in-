@@ -1063,13 +1063,28 @@ class SalesNavigatorScraper:
         except Exception:
             pass
 
-        # ── Step 2: move cursor onto the card so the panel receives events ───
-        if lead_card:
-            try:
-                self.cursor.move_to(lead_card)
-                time.sleep(random.uniform(0.4, 0.8))
-            except Exception:
-                pass
+        # ── Step 2: move cursor to the right-side panel, vertically centred ──
+        # Sales Navigator is a split-pane layout: the RIGHT half is the
+        # scrollable results panel.  The scroll events only register when the
+        # mouse is actually hovering over that right pane.
+        # Position: x = far-right third of viewport, y = vertical centre.
+        try:
+            viewport_w = self.driver.execute_script("return window.innerWidth")
+            viewport_h = self.driver.execute_script("return window.innerHeight")
+            # Right side: 75-85% of width; vertical centre: 45-55% of height
+            target_x = int(viewport_w * random.uniform(0.75, 0.85))
+            target_y = int(viewport_h * random.uniform(0.45, 0.55))
+            self.cursor.move_to([target_x, target_y])
+            print(f"  🖱️  Cursor positioned at right-panel centre ({target_x}, {target_y})")
+            time.sleep(random.uniform(0.4, 0.8))
+        except Exception:
+            # Fallback: hover over the first lead card if coordinate move fails
+            if lead_card:
+                try:
+                    self.cursor.move_to(lead_card)
+                    time.sleep(random.uniform(0.4, 0.8))
+                except Exception:
+                    pass
 
         # ── Step 3: find the scrollable parent of the lead card via JS ───────
         # Walks up the DOM tree and returns the first element whose computed
@@ -1098,17 +1113,14 @@ class SalesNavigatorScraper:
         else:
             print("  ⚠️  Scrollable panel not found — falling back to window scroll")
 
-        # ── Step 4: continuously scroll downward without ever resetting ─────────
-        #
-        # WHY scrollBy FAILS: Sales Navigator uses a React virtual-list that
-        # rebuilds the DOM during scroll, resetting scrollTop back to 0.
-        # scrollBy is RELATIVE to the current scrollTop — so after a DOM reset
-        # `scrollBy(300)` just moves 300 px from 0 again, appearing to loop.
-        #
-        # FIX: maintain our own `target_pos` that ONLY ever increases.
-        # Each step we set scrollTop = target_pos via scrollTo (absolute).
-        # Even if React resets scrollTop to 0, on the next step we jump back
-        # to our target, so the scroll never goes backwards.
+        # ── Step 4: gradually scroll to the bottom so every card lazy-loads ────
+        # IMPORTANT: Never jump/teleport — Sales Navigator lazy-loads cards only
+        # when the viewport scrolls past them.  A forced scrollTop = scrollHeight
+        # skips all intermediate cards and loses data.  Always use scrollBy.
+        scroll_attempts = 0
+        max_scroll_attempts = 20   # generous — up to ~80 small steps
+        stable_count = 0           # consecutive checks where height did NOT grow
+        STABLE_THRESHOLD = 3       # declare bottom only after 3 stable checks in a row
 
         def _get_pos():
             """Returns [scrollTop, clientHeight, scrollHeight]."""
@@ -1123,18 +1135,17 @@ class SalesNavigatorScraper:
                 "return [window.pageYOffset, window.innerHeight, document.body.scrollHeight];"
             )
 
-        def _scroll_to(pos):
-            """Set absolute scroll position — never scrollBy."""
+        def _scroll_down(px):
             if scroll_panel:
                 self.driver.execute_script(
-                    "arguments[0].scrollTop = arguments[1];", scroll_panel, pos
+                    "arguments[0].scrollBy(0, arguments[1]);", scroll_panel, px
                 )
             else:
-                self.driver.execute_script(f"window.scrollTo(0, {pos});")
+                self.driver.execute_script(f"window.scrollBy(0, {px});")
 
         def _scroll_top():
             if scroll_panel:
-                self.driver.execute_script("arguments[0].scrollTop = 0;", scroll_panel)
+                self.driver.execute_script("arguments[0].scrollTo(0, 0);", scroll_panel)
             else:
                 self.driver.execute_script("window.scrollTo(0, 0);")
 
@@ -1143,73 +1154,63 @@ class SalesNavigatorScraper:
 
         st, ch, sh = _get_pos()
         last_height = sh
-        target_pos  = 0          # our monotonically-increasing scroll target
-        scroll_attempts = 0
-        max_scroll_attempts = 80
-        stable_count = 0
-        STABLE_THRESHOLD = 3
         print(f"  ↓ Start: scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
 
         while scroll_attempts < max_scroll_attempts:
-            # Advance our target by a human-like chunk
-            step_px = random.randint(200, 350)
-            target_pos += step_px
+            # Scroll down by a small human-like chunk
+            scroll_px = random.randint(200, 380)
+            _scroll_down(scroll_px)
+            time.sleep(random.uniform(0.7, 1.4))
 
-            # Apply the absolute target — this survives React DOM resets
-            _scroll_to(target_pos)
-            time.sleep(random.uniform(0.7, 1.3))
-
-            # Occasionally re-hover a lead card so the panel keeps focus
-            if random.random() < 0.35 and lead_card:
+            # Occasionally nudge the cursor slightly within the right panel
+            # so it keeps receiving scroll events (Sales Navigator requires hover)
+            if random.random() < 0.35:
                 try:
-                    self.cursor.move_to(lead_card)
-                    time.sleep(random.uniform(0.15, 0.35))
+                    vw = self.driver.execute_script("return window.innerWidth")
+                    vh = self.driver.execute_script("return window.innerHeight")
+                    nx = int(vw * random.uniform(0.72, 0.88))
+                    ny = int(vh * random.uniform(0.40, 0.60))
+                    self.cursor.move_to([nx, ny])
+                    time.sleep(random.uniform(0.2, 0.4))
                 except Exception:
                     pass
 
             st, ch, sh = _get_pos()
             scroll_attempts += 1
+            print(f"  ↓ Scroll {scroll_attempts}: scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
 
-            # Sync target_pos with real scrollTop if the browser clamped it
-            # (e.g. target_pos overshoots beyond scrollHeight)
-            if st < target_pos:
-                target_pos = st  # clamp so next step doesn't overshoot further
-
-            print(f"  ↓ Scroll {scroll_attempts}: target={int(target_pos)}, "
-                  f"scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
-
-            # New content lazy-loaded?
+            # Check whether new content appeared
             if sh > last_height:
+                # New cards lazy-loaded — reset stable counter and keep going
                 stable_count = 0
                 last_height = sh
                 continue
 
-            # Height unchanged this step
+            # Height did not grow this step
             stable_count += 1
 
             if _at_bottom(st, ch, sh):
                 if stable_count >= STABLE_THRESHOLD:
+                    # Truly at the bottom and no new content for several steps
                     print(f"  ↳ Reached true bottom after {scroll_attempts} scrolls "
-                          f"(stable×{stable_count}, "
-                          f"scrollTop+clientH={int(st+ch)}, scrollH={int(sh)})")
+                          f"(stable×{stable_count}, scrollTop+clientH={int(st+ch)}, scrollH={int(sh)})")
                     break
-                # At the edge but give lazy-load more time
-                print(f"  ↓ At bottom edge — waiting for lazy-load (stable×{stable_count})...")
-                time.sleep(random.uniform(2.0, 3.0))
+                else:
+                    # At bottom but give lazy-load more time before declaring done
+                    print(f"  ↓ At bottom edge — waiting for lazy-load (stable×{stable_count})...")
+                    time.sleep(random.uniform(2.0, 3.0))
             else:
-                # Not at bottom and height stable — pause and wait for more content
+                # Not at bottom yet but height is stable — wait a bit and retry
                 if stable_count >= STABLE_THRESHOLD:
-                    print(f"  ↓ Height stable ({stable_count}×) — waiting for lazy-load...")
+                    print(f"  ↓ Height stable for {stable_count} steps — extra wait for lazy-load...")
                     time.sleep(random.uniform(2.5, 4.0))
                     _, _, sh_new = _get_pos()
                     if sh_new == last_height:
-                        stable_count = 0  # reset and keep scrolling
+                        # Still nothing new — keep scrolling normally
+                        stable_count = 0
 
-        # Return to top so the parser can see all rendered cards
-        _scroll_top()
-        time.sleep(random.uniform(0.8, 1.2))
         st2, ch2, sh2 = _get_pos()
-        print(f"  ✅ Scroll complete — scrollH={int(sh2)}, back at top (scrollTop={int(st2)})")
+        print(f"  ✅ Scroll complete — scrollH={int(sh2)}, staying at bottom (scrollTop={int(st2)})")
 
     def _is_element_in_viewport(self, element) -> bool:
         """
