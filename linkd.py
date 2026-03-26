@@ -21,7 +21,7 @@ class SalesNavigatorScraper:
         try:
             with open(self.cookie_file, 'r', encoding='utf-8') as f:
                 cookies = json.load(f)
-            print(f"✅ Loaded {len(cookies)} cookies from file")
+            print(f"Loaded {len(cookies)} cookies from file")
             
             # Verify critical cookies for Sales Navigator
             cookie_names = [c.get('name') for c in cookies]
@@ -35,37 +35,38 @@ class SalesNavigatorScraper:
             regular_present = [c for c in regular_cookies if c in cookie_names]
             sales_present = [c for c in sales_nav_cookies if c in cookie_names]
             
-            print(f"📋 Regular LinkedIn cookies: {len(regular_present)}/{len(regular_cookies)}")
-            print(f"📋 Sales Navigator cookies: {len(sales_present)}/{len(sales_nav_cookies)}")
+            print(f" Regular LinkedIn cookies: {len(regular_present)}/{len(regular_cookies)}")
+            print(f" Sales Navigator cookies: {len(sales_present)}/{len(sales_nav_cookies)}")
             
             if len(sales_present) < 2:
-                print("⚠️ WARNING: Missing Sales Navigator enterprise cookies!")
+                print(" WARNING: Missing Sales Navigator enterprise cookies!")
                 print("   You need to export cookies AFTER logging into Sales Navigator")
                 print("   Not just regular LinkedIn!")
             
             return cookies
         except Exception as e:
-            print(f"❌ Error loading cookies: {e}")
+            print(f" Error loading cookies: {e}")
             return None
     
     def setup_driver(self):
         """Setup undetected Chrome driver"""
         try:
-            print("🔄 Initializing Chrome driver...")
+            print(" Initializing Chrome driver...")
             
             self.driver = uc.Chrome(
                 use_subprocess=True,
                 headless=False,
+                version_main=146,
             )
             
-            time.sleep(2)
+            time.sleep(random.uniform(0.5, 1.0))
             self.cursor = WebCursor(self.driver)
-            print("✅ Driver setup complete")
-            print("🖱️  HumanCursor WebCursor initialized")
+            print(" Driver setup complete")
+            print("  HumanCursor WebCursor initialized")
             return True
             
         except Exception as e:
-            print(f"❌ Driver setup failed: {e}")
+            print(f" Driver setup failed: {e}")
             import traceback
             traceback.print_exc()
             return False
@@ -82,7 +83,7 @@ class SalesNavigatorScraper:
                 x = random.randint(int(viewport_w * 0.1), int(viewport_w * 0.9))
                 y = random.randint(int(viewport_h * 0.1), int(viewport_h * 0.85))
                 self.cursor.move_to([x, y])
-                time.sleep(random.uniform(0.3, 1.2))
+                time.sleep(random.uniform(0.5, 1.0))
         except Exception as e:
             pass  # Never block on human cursor errors
 
@@ -92,7 +93,7 @@ class SalesNavigatorScraper:
             for _ in range(times):
                 scroll_px = random.randint(250, 500) * (1 if direction == 'down' else -1)
                 self.driver.execute_script(f"window.scrollBy(0, {scroll_px});")
-                time.sleep(random.uniform(0.6, 1.5))
+                time.sleep(random.uniform(0.5, 1.0))
                 self.human_idle(1, 2)
         except Exception:
             pass
@@ -107,7 +108,7 @@ class SalesNavigatorScraper:
             for el in targets:
                 try:
                     self.cursor.move_to(el, relative_position=[random.uniform(0.2, 0.8), random.uniform(0.2, 0.8)])
-                    time.sleep(random.uniform(0.4, 1.0))
+                    time.sleep(random.uniform(0.5, 1.0))
                 except Exception:
                     pass
         except Exception:
@@ -130,9 +131,9 @@ class SalesNavigatorScraper:
                     };
                 }
             """)
-            print("✅ Stealth scripts applied")
+            print(" Stealth scripts applied")
         except Exception as e:
-            print(f"⚠️ Stealth script error: {e}")
+            print(f" Stealth script error: {e}")
         self.inject_cursor_overlay()
 
     def inject_cursor_overlay(self):
@@ -214,22 +215,22 @@ class SalesNavigatorScraper:
         """Inject cookies into browser"""
         try:
             # First visit Google
-            print("📡 Warming up browser...")
+            print(" Warming up browser...")
             self.driver.get("https://www.google.com")
-            time.sleep(random.uniform(2, 4))
+            time.sleep(random.uniform(0.5, 1.0))
             
             self.apply_stealth_after_load()
             
             # Navigate to LinkedIn
-            print("📡 Navigating to LinkedIn...")
+            print(" Navigating to LinkedIn...")
             self.driver.get("https://www.linkedin.com")
-            time.sleep(random.uniform(3, 5))
+            time.sleep(random.uniform(0.5, 1.0))
             self.inject_cursor_overlay()
             self.human_idle(2, 4)  # Simulate human landing on page
             
             # Clear existing cookies
             self.driver.delete_all_cookies()
-            print("🧹 Cleared existing cookies")
+            print(" Cleared existing cookies")
             
             # Add cookies one by one
             success_count = 0
@@ -255,45 +256,45 @@ class SalesNavigatorScraper:
                     success_count += 1
                     
                 except Exception as e:
-                    print(f"  ↳ Could not add {cookie.get('name')}: {str(e)[:50]}")
+                    print(f"   Could not add {cookie.get('name')}: {str(e)[:50]}")
                     continue
             
-            print(f"✅ Added {success_count} out of {len(self.cookies)} cookies")
+            print(f" Added {success_count} out of {len(self.cookies)} cookies")
             
             # Refresh to apply cookies
             self.driver.refresh()
-            time.sleep(random.uniform(4, 6))
+            time.sleep(random.uniform(0.5, 1.0))
             self.inject_cursor_overlay()
             
             # Navigate to feed
-            print("🔄 Navigating to feed...")
+            print(" Navigating to feed...")
             self.driver.get("https://www.linkedin.com/feed/")
-            time.sleep(random.uniform(5, 8))
+            time.sleep(random.uniform(0.5, 1.0))
             self.inject_cursor_overlay()
-            print("🖱️  Simulating human browsing the feed...")
+            print("  Simulating human browsing the feed...")
             self.human_idle(3, 5)       # Look around the page
             self.human_scroll('down', random.randint(2, 4))  # Scroll down like reading
-            time.sleep(random.uniform(1, 2))
+            time.sleep(random.uniform(0.5, 1.0))
             self.human_scroll('up', 1)  # Scroll back up slightly
             
             return True
             
         except Exception as e:
-            print(f"❌ Cookie injection failed: {e}")
+            print(f" Cookie injection failed: {e}")
             return False
     
     def verify_connection(self):
         """Verify if cookies successfully authenticated"""
         print("\n" + "="*60)
-        print("🔍 VERIFYING LINKEDIN CONNECTION")
+        print(" VERIFYING LINKEDIN CONNECTION")
         print("="*60)
         
         current_url = self.driver.current_url
         page_title = self.driver.title
         page_source = self.driver.page_source.lower()
         
-        print(f"📍 Current URL: {current_url}")
-        print(f"📄 Page Title: {page_title}")
+        print(f" Current URL: {current_url}")
+        print(f" Page Title: {page_title}")
         
         # Check if logged in to regular LinkedIn
         is_logged_in = False
@@ -321,15 +322,15 @@ class SalesNavigatorScraper:
             is_logged_in = True
             reasons.append("Found notification/message elements")
         
-        print("\n📊 Authentication Results:")
-        print(f"  {'✅' if is_logged_in else '❌'} Logged In: {is_logged_in}")
+        print("\n Authentication Results:")
+        print(f"  {'' if is_logged_in else ''} Logged In: {is_logged_in}")
         if reasons:
-            print(f"  📌 Evidence: {', '.join(reasons)}")
+            print(f"   Evidence: {', '.join(reasons)}")
         
         if is_logged_in:
-            print("\n✅✅✅ SUCCESS: Connected to LinkedIn! ✅✅✅")
+            print("\n SUCCESS: Connected to LinkedIn! ")
         else:
-            print("\n❌❌❌ FAILED: Not connected to LinkedIn ❌❌❌")
+            print("\n FAILED: Not connected to LinkedIn ")
         
         return is_logged_in
     
@@ -339,7 +340,7 @@ class SalesNavigatorScraper:
         left sidebar of the LinkedIn feed page.
         Falls back to direct URL only if the element cannot be found.
         """
-        print("\n🖱️  Attempting to navigate to Sales Navigator via UI click...")
+        print("\n  Attempting to navigate to Sales Navigator via UI click...")
 
         sn_link = None
 
@@ -354,30 +355,30 @@ class SalesNavigatorScraper:
                 els = self.driver.find_elements(By.CSS_SELECTOR, sel)
                 if els:
                     sn_link = els[0]
-                    print(f"  ✅ Found Sales Navigator link via: {sel}")
+                    print(f"   Found Sales Navigator link via: {sel}")
                     break
             except Exception:
                 continue
 
-        # ── XPath fallback: match by the visible span text ────────────────────
+        #  XPath fallback: match by the visible span text 
         if not sn_link:
             try:
                 sn_link = self.driver.find_element(
                     By.XPATH,
                     '//span[normalize-space(text())="Go to Sales Navigator"]/ancestor::a'
                 )
-                print("  ✅ Found Sales Navigator link via XPath text match")
+                print("   Found Sales Navigator link via XPath text match")
             except Exception:
                 pass
 
-        # ── Click it ──────────────────────────────────────────────────────────
+        #  Click it 
         if sn_link:
             try:
                 original_handles = set(self.driver.window_handles)
                 self.cursor.click_on(sn_link)
-                print("  🖱️  Clicked 'Go to Sales Navigator' link in left sidebar")
+                print("    Clicked 'Go to Sales Navigator' link in left sidebar")
 
-                # The link has target="_blank" — it opens in a NEW TAB.
+                # The link has target="_blank"  it opens in a NEW TAB.
                 # Wait up to 10 s for the new tab to appear, then switch to it.
                 new_handle = None
                 for _ in range(20):
@@ -390,30 +391,30 @@ class SalesNavigatorScraper:
 
                 if new_handle:
                     self.driver.switch_to.window(new_handle)
-                    print(f"  🔀 Switched to new tab: {self.driver.current_url}")
+                    print(f"   Switched to new tab: {self.driver.current_url}")
                 else:
-                    print("  ⚠️  No new tab detected — may have opened in same tab")
+                    print("    No new tab detected  may have opened in same tab")
 
                 # Wait for Sales Navigator to fully load
                 try:
                     WebDriverWait(self.driver, 20).until(
                         lambda d: "sales" in d.current_url
                     )
-                    print(f"  ✅ Confirmed on Sales Navigator: {self.driver.current_url}")
+                    print(f"   Confirmed on Sales Navigator: {self.driver.current_url}")
                 except Exception:
-                    print(f"  ⚠️  Timed out waiting for sales URL, current: {self.driver.current_url}")
+                    print(f"    Timed out waiting for sales URL, current: {self.driver.current_url}")
 
-                time.sleep(random.uniform(3, 5))
+                time.sleep(random.uniform(0.5, 1.0))
                 self.inject_cursor_overlay()
                 self.human_idle(2, 3)
                 return True
             except Exception as e:
-                print(f"  ⚠️  click_on failed: {e}")
+                print(f"    click_on failed: {e}")
 
-        # ── Fallback: direct URL ───────────────────────────────────────────────
-        print("  ⚠️  UI navigation failed — falling back to direct URL")
+        #  Fallback: direct URL 
+        print("    UI navigation failed  falling back to direct URL")
         self.driver.get("https://www.linkedin.com/sales/home")
-        time.sleep(random.uniform(5, 8))
+        time.sleep(random.uniform(0.5, 1.0))
         self.inject_cursor_overlay()
         self.human_idle(2, 3)
         return False
@@ -423,11 +424,11 @@ class SalesNavigatorScraper:
         On the Sales Navigator home/search page, click the 'Lead filters' button.
         Real DOM: <a href="/sales/search/people?viewAllFilters=true">Lead filters</a>
         """
-        print("\n🖱️  Looking for 'Lead filters' button...")
+        print("\n  Looking for 'Lead filters' button...")
 
         lead_filter_link = None
 
-        # ── CSS selectors from the actual DOM ─────────────────────────────────
+        #  CSS selectors from the actual DOM 
         selectors = [
             'a[href="/sales/search/people?viewAllFilters=true"]',
             'a[href*="viewAllFilters=true"]',
@@ -441,39 +442,39 @@ class SalesNavigatorScraper:
                 )
                 if els:
                     lead_filter_link = els[0]
-                    print(f"  ✅ Found Lead filters via: {sel}")
+                    print(f"   Found Lead filters via: {sel}")
                     break
             except Exception:
                 continue
 
-        # ── XPath fallback: match visible span text ────────────────────────────
+        #  XPath fallback: match visible span text 
         if not lead_filter_link:
             try:
                 lead_filter_link = self.driver.find_element(
                     By.XPATH,
                     '//span[normalize-space(text())="Lead filters"]/ancestor::a'
                 )
-                print("  ✅ Found Lead filters via XPath text match")
+                print("   Found Lead filters via XPath text match")
             except Exception:
                 pass
 
         if lead_filter_link:
             try:
                 self.cursor.click_on(lead_filter_link)
-                print("  🖱️  Clicked 'Lead filters' button")
+                print("    Clicked 'Lead filters' button")
                 # Wait until the search/people page with filters loads
                 WebDriverWait(self.driver, 15).until(
                     lambda d: 'sales/search/people' in d.current_url
                 )
-                print(f"  ✅ Lead filters page loaded: {self.driver.current_url}")
-                time.sleep(random.uniform(2, 4))
+                print(f"   Lead filters page loaded: {self.driver.current_url}")
+                time.sleep(random.uniform(0.5, 1.0))
                 self.inject_cursor_overlay()
                 self.human_idle(1, 2)
                 return True
             except Exception as e:
-                print(f"  ⚠️  Lead filters click failed: {e}")
+                print(f"    Lead filters click failed: {e}")
         else:
-            print("  ⚠️  Lead filters button not found on page")
+            print("    Lead filters button not found on page")
 
         return False
 
@@ -489,32 +490,32 @@ class SalesNavigatorScraper:
         """
         from selenium.webdriver.common.keys import Keys
 
-        print(f"\n🏢 Entering company filter: '{company_name}'...")
+        print(f"\n Entering company filter: '{company_name}'...")
 
-        # ── Step 1: Wait for the Current company fieldset ────────────────────
+        #  Step 1: Wait for the Current company fieldset 
         fieldset_sel = 'fieldset[data-x-search-filter="CURRENT_COMPANY"]'
         try:
             fieldset = WebDriverWait(self.driver, 20).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, fieldset_sel))
             )
-            print("  ✅ Found Current company fieldset")
+            print("   Found Current company fieldset")
         except Exception:
-            print("  ⚠️  Current company fieldset not found — filters panel may not be open")
+            print("    Current company fieldset not found  filters panel may not be open")
             return False
 
-        # ── Step 2: Scroll the fieldset into view ────────────────────────────
+        #  Step 2: Scroll the fieldset into view 
         self.driver.execute_script(
             "arguments[0].scrollIntoView({block: 'center'});", fieldset
         )
         time.sleep(random.uniform(0.5, 1.0))
 
-        # ── Step 3: Click the Current company toggle button ──────────────────
+        #  Step 3: Click the Current company toggle button 
         # The button lives just below the "Company" legend inside the fieldset:
         #   <fieldset data-x-search-filter="CURRENT_COMPANY">
         #     <div class="ph4 flex align-items-center relative">
-        #       <legend …>…</legend>
+        #       <legend ></legend>
         #       <button aria-expanded="false"
-        #               class="… search-filter_focus-target--button …">
+        #               class=" search-filter_focus-target--button ">
         #
         # We must click it whenever aria-expanded="false" so the section
         # expands and the typeahead input becomes visible in the DOM.
@@ -529,19 +530,19 @@ class SalesNavigatorScraper:
                 els = fieldset.find_elements(By.CSS_SELECTOR, sel)
                 if els:
                     toggle_btn = els[0]
-                    print(f"  ✅ Found Company toggle button via: {sel}")
+                    print(f"   Found Company toggle button via: {sel}")
                     break
             except Exception:
                 continue
 
         if toggle_btn is None:
-            # XPath fallback — look for the expand/collapse button directly
+            # XPath fallback  look for the expand/collapse button directly
             try:
                 toggle_btn = fieldset.find_element(
                     By.XPATH,
                     './/button[@aria-expanded]'
                 )
-                print("  ✅ Found Company toggle button via XPath")
+                print("   Found Company toggle button via XPath")
             except Exception:
                 pass
 
@@ -550,44 +551,44 @@ class SalesNavigatorScraper:
             self.driver.execute_script(
                 "arguments[0].scrollIntoView({block: 'center'});", toggle_btn
             )
-            time.sleep(random.uniform(0.3, 0.6))
+            time.sleep(random.uniform(0.5, 1.0))
 
             is_expanded = toggle_btn.get_attribute('aria-expanded')
-            print(f"  ℹ️  Company toggle aria-expanded='{is_expanded}'")
+            print(f"    Company toggle aria-expanded='{is_expanded}'")
 
             if is_expanded == 'false':
-                print("  🖱️  Clicking Company toggle button to expand the section...")
+                print("    Clicking Company toggle button to expand the section...")
                 # Primary: human cursor click
                 clicked = False
                 try:
                     self.cursor.click_on(toggle_btn)
                     clicked = True
                 except Exception as e:
-                    print(f"  ⚠️  cursor.click_on failed ({e}) — trying JS click")
+                    print(f"    cursor.click_on failed ({e})  trying JS click")
 
                 if not clicked:
                     try:
                         self.driver.execute_script("arguments[0].click();", toggle_btn)
                         clicked = True
-                        print("  ✅ JS click succeeded")
+                        print("   JS click succeeded")
                     except Exception as e2:
-                        print(f"  ⚠️  JS click also failed: {e2}")
+                        print(f"    JS click also failed: {e2}")
 
                 # Wait for the section to actually expand (aria-expanded becomes "true")
                 try:
                     WebDriverWait(self.driver, 8).until(
                         lambda d: toggle_btn.get_attribute('aria-expanded') == 'true'
                     )
-                    print("  ✅ Company section expanded")
+                    print("   Company section expanded")
                 except Exception:
-                    print("  ⚠️  aria-expanded did not switch to true — continuing anyway")
-                time.sleep(random.uniform(0.6, 1.2))
+                    print("    aria-expanded did not switch to true  continuing anyway")
+                time.sleep(random.uniform(0.5, 1.0))
             else:
-                print("  ✅ Company section already expanded")
+                print("   Company section already expanded")
         else:
-            print("  ⚠️  Company toggle button not found — section may already be expanded")
+            print("    Company toggle button not found  section may already be expanded")
 
-        # ── Step 4: Find the input inside the fieldset ───────────────────────
+        #  Step 4: Find the input inside the fieldset 
         # The input only appears AFTER the section is expanded; use
         # visibility_of_element_located so we wait for it to be truly visible.
         company_input = None
@@ -605,7 +606,7 @@ class SalesNavigatorScraper:
                         (By.CSS_SELECTOR, f'{fieldset_sel} {sel}')
                     )
                 )
-                print(f"  ✅ Found company input via: {sel}")
+                print(f"   Found company input via: {sel}")
                 break
             except Exception:
                 continue
@@ -617,36 +618,36 @@ class SalesNavigatorScraper:
                     f'//fieldset[@data-x-search-filter="CURRENT_COMPANY"]'
                     f'//input[contains(@placeholder, "companies")]'
                 )
-                print("  ✅ Found company input via XPath")
+                print("   Found company input via XPath")
             except Exception:
                 pass
 
         if not company_input:
-            print("  ⚠️  Company filter input not found inside fieldset")
+            print("    Company filter input not found inside fieldset")
             return False
 
-        # ── Step 5: Click the input and type the company name ─────────────────
+        #  Step 5: Click the input and type the company name 
         self.driver.execute_script(
             "arguments[0].scrollIntoView({block: 'center'});", company_input
         )
-        time.sleep(random.uniform(0.3, 0.6))
+        time.sleep(random.uniform(0.5, 1.0))
 
         try:
             self.cursor.click_on(company_input)
             time.sleep(random.uniform(0.5, 1.0))
         except Exception as e:
-            print(f"  ⚠️  Could not click input: {e}")
+            print(f"    Could not click input: {e}")
             return False
 
-        print(f"  ⌨️  Typing '{company_name}'...")
+        print(f"    Typing '{company_name}'...")
         for char in company_name:
             company_input.send_keys(char)
-            time.sleep(random.uniform(0.08, 0.18))
+            time.sleep(random.uniform(0.5, 1.0))
 
         # Wait for autocomplete dropdown to populate
-        time.sleep(random.uniform(1.8, 2.8))
+        time.sleep(random.uniform(0.5, 1.0))
 
-        # ── Step 6: Click the first matching suggestion ───────────────────────
+        #  Step 6: Click the first matching suggestion 
         suggestion = None
         suggestion_selectors = [
             '.artdeco-typeahead__results-list li:first-child',
@@ -660,7 +661,7 @@ class SalesNavigatorScraper:
                 els = self.driver.find_elements(By.CSS_SELECTOR, sel)
                 if els:
                     suggestion = els[0]
-                    print(f"  ✅ Found suggestion via: {sel}")
+                    print(f"   Found suggestion via: {sel}")
                     break
             except Exception:
                 continue
@@ -671,38 +672,38 @@ class SalesNavigatorScraper:
                     By.XPATH,
                     f'//*[@role="option" and contains(., "{company_name.split()[0]}")]'
                 )
-                print("  ✅ Found suggestion via XPath text match")
+                print("   Found suggestion via XPath text match")
             except Exception:
                 pass
 
         if suggestion:
             try:
                 self.cursor.click_on(suggestion)
-                print(f"  🖱️  Clicked suggestion for '{company_name}'")
+                print(f"    Clicked suggestion for '{company_name}'")
             except Exception as e:
-                print(f"  ⚠️  Could not click suggestion ({e}) — pressing Enter instead")
+                print(f"    Could not click suggestion ({e})  pressing Enter instead")
                 company_input.send_keys(Keys.RETURN)
         else:
-            print("  ℹ️  No suggestion found — pressing Enter")
+            print("    No suggestion found  pressing Enter")
             company_input.send_keys(Keys.RETURN)
 
         # Wait for results to refresh with the company filter applied
-        time.sleep(random.uniform(2.5, 4.0))
+        time.sleep(random.uniform(0.5, 1.0))
         self.inject_cursor_overlay()
         self.human_idle(1, 2)
-        print(f"  ✅ Company filter applied for '{company_name}'")
+        print(f"   Company filter applied for '{company_name}'")
         return True
 
     def verify_sales_navigator_access(self):
         """Check if user has Sales Navigator access"""
         print("\n" + "="*60)
-        print("🔍 CHECKING SALES NAVIGATOR ACCESS")
+        print(" CHECKING SALES NAVIGATOR ACCESS")
         print("="*60)
         
         current_url = self.driver.current_url
         page_source = self.driver.page_source.lower()
         
-        print(f"📍 Current URL: {current_url}")
+        print(f" Current URL: {current_url}")
         
         has_access = False
         reasons = []
@@ -725,19 +726,19 @@ class SalesNavigatorScraper:
         
         # Check if we were redirected to upgrade page
         if 'upgrade' in current_url or 'premium' in current_url:
-            print("❌ You don't have Sales Navigator access - redirected to upgrade page")
+            print(" You don't have Sales Navigator access - redirected to upgrade page")
             return False
         
-        print("\n📊 Sales Navigator Access Results:")
-        print(f"  {'✅' if has_access else '❌'} Has Access: {has_access}")
+        print("\n Sales Navigator Access Results:")
+        print(f"  {'' if has_access else ''} Has Access: {has_access}")
         if reasons:
-            print(f"  📌 Evidence: {', '.join(reasons)}")
+            print(f"   Evidence: {', '.join(reasons)}")
         
         if has_access:
-            print("\n✅✅✅ SUCCESS: You have Sales Navigator access! ✅✅✅")
+            print("\n SUCCESS: You have Sales Navigator access! ")
         else:
-            print("\n❌❌❌ FAILED: Cannot access Sales Navigator ❌❌❌")
-            print("\n👉 Possible reasons:")
+            print("\n FAILED: Cannot access Sales Navigator ")
+            print("\n Possible reasons:")
             print("   1. Your LinkedIn account doesn't have Sales Navigator subscription")
             print("   2. Your cookies are from regular LinkedIn, not Sales Navigator")
             print("   3. You need to log into Sales Navigator manually first")
@@ -747,11 +748,11 @@ class SalesNavigatorScraper:
     def run_verification(self):
         """Complete verification workflow"""
         print("\n" + "="*60)
-        print("🚀 STARTING LINKEDIN VERIFICATION")
+        print(" STARTING LINKEDIN VERIFICATION")
         print("="*60)
         
         if not self.cookies:
-            print("❌ No cookies loaded. Exiting.")
+            print(" No cookies loaded. Exiting.")
             return False
         
         # Step 1: Setup driver
@@ -760,25 +761,25 @@ class SalesNavigatorScraper:
         
         # Step 2: Inject cookies
         if not self.inject_cookies():
-            print("\n❌ Cookie injection failed.")
+            print("\n Cookie injection failed.")
             self.cleanup()
             return False
         
         # Step 3: Verify regular LinkedIn connection
         if not self.verify_connection():
-            print("\n❌ Cannot connect to regular LinkedIn.")
+            print("\n Cannot connect to regular LinkedIn.")
             self.cleanup()
             return False
         
-        print("\n✅ Successfully connected to regular LinkedIn!")
+        print("\n Successfully connected to regular LinkedIn!")
         
         # Step 4: Navigate to Sales Navigator by clicking through the UI
-        print("\n🚀 Navigating to Sales Navigator via UI clicks...")
+        print("\n Navigating to Sales Navigator via UI clicks...")
         self.navigate_to_sales_navigator()
-        print("🖱️  Simulating human exploring Sales Navigator home...")
+        print("  Simulating human exploring Sales Navigator home...")
         self.human_idle(2, 4)
         self.human_scroll('down', random.randint(1, 3))
-        time.sleep(random.uniform(1, 2))
+        time.sleep(random.uniform(0.5, 1.0))
         has_sales_nav = self.verify_sales_navigator_access()
 
         # Step 5: Click 'Lead filters' to navigate to the search page
@@ -786,44 +787,44 @@ class SalesNavigatorScraper:
             self.click_lead_filters()
 
         if has_sales_nav:
-            # ── Wait for user to apply filters manually, then confirm ──────────
+            #  Wait for user to apply filters manually, then confirm 
             print("\n" + "="*60)
-            print("⏸️  FILTERS PAGE IS OPEN — apply your filters in the browser now")
+            print("  FILTERS PAGE IS OPEN  apply your filters in the browser now")
             print("="*60)
-            print("   • Type the company name, set headcount, location, etc.")
-            print("   • Once the results are showing, come back here.")
-            print("   • Type  'y'  and press Enter to START scraping.")
-            print("   • Type anything else to CANCEL.")
+            print("    Type the company name, set headcount, location, etc.")
+            print("    Once the results are showing, come back here.")
+            print("    Type  'y'  and press Enter to START scraping.")
+            print("    Type anything else to CANCEL.")
             print("="*60)
             try:
-                go = input("▶️  Start scrape? [y/N]: ").strip().lower()
+                go = input("  Start scrape? [y/N]: ").strip().lower()
             except (EOFError, KeyboardInterrupt):
                 go = ''
 
             if go not in ('y', 'yes'):
-                print("🛑 Scrape cancelled by user.")
+                print(" Scrape cancelled by user.")
                 input("\nPress Enter to close browser...")
                 self.cleanup()
                 return False
 
             current_search_url = self.driver.current_url
-            print(f"🔗 Using live search URL: {current_search_url}")
+            print(f" Using live search URL: {current_search_url}")
 
             leads = self.scrape_search_results(
                 search_url=current_search_url,
-                max_pages=20,
+                max_pages=30,
                 output_file='scraped_leads.json'
             )
 
             if leads:
-                print(f"\n🎉 Scraped {len(leads)} companies total!")
-                print("📁 Files saved: scraped_leads.json + scraped_leads.csv")
+                print(f"\n Scraped {len(leads)} companies total!")
+                print(" Files saved: scraped_leads.json + scraped_leads.csv")
             else:
                 # Fallback: save raw HTML for manual inspection
                 self.save_page_html('search_results.html')
         else:
-            print("\n❌ Sales Navigator access failed.")
-            print("\n📌 To fix this:")
+            print("\n Sales Navigator access failed.")
+            print("\n To fix this:")
             print("   1. Open Chrome manually and go to linkedin.com/sales")
             print("   2. Log in to Sales Navigator")
             print("   3. Use EditThisCookie to export cookies AGAIN")
@@ -836,14 +837,14 @@ class SalesNavigatorScraper:
     
     def extract_sample_data(self):
         """Extract sample data from Sales Navigator search results"""
-        print("\n📊 Extracting sample data from search results...")
+        print("\n Extracting sample data from search results...")
         
         try:
             search_url = (
                 "https://www.linkedin.com/sales/search/people?query=(recentSearchParam%3A(doLogHistory%3Atrue)%2Cfilters%3AList((type%3ACURRENT_COMPANY%2Cvalues%3AList((id%3Aurn%253Ali%253Aorganization%253A67535055%2Ctext%3AElite%2520EPM%2CselectionType%3AINCLUDED%2Cparent%3A(id%3A0))))))&sessionId=aNsocAN4TE6fWN7%2Bf2bBSg%3D%3D&viewAllFilters=true"
             )
             self.driver.get(search_url)
-            time.sleep(random.uniform(5, 8))
+            time.sleep(random.uniform(0.5, 1.0))
             self.inject_cursor_overlay()
             
             # Wait for results to load
@@ -851,24 +852,24 @@ class SalesNavigatorScraper:
                 WebDriverWait(self.driver, 20).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, ".search-results__results-container"))
                 )
-                print("✅ Search results loaded")
-                print("🖱️  Simulating human scanning results...")
+                print(" Search results loaded")
+                print("  Simulating human scanning results...")
                 self.human_idle(2, 3)
                 self.human_hover_elements(".search-results__result-item, .linked-area, .artdeco-entity-lockup")
                 self.human_scroll('down', random.randint(3, 5))
-                time.sleep(random.uniform(1.5, 3))
+                time.sleep(random.uniform(0.5, 1.0))
                 self.human_scroll('up', random.randint(1, 2))
                 
                 # Save full rendered HTML
                 self.save_page_html('extract_sample_data.html')
 
             except:
-                print("⚠️ Could not find search results")
+                print(" Could not find search results")
                 
         except Exception as e:
-            print(f"❌ Data extraction failed: {e}")
+            print(f" Data extraction failed: {e}")
     
-    def scrape_search_results(self, search_url, max_pages=20, output_file='scraped_leads.json'):
+    def scrape_search_results(self, search_url, max_pages=30, output_file='scraped_leads.json'):
         """
         Navigate to a Sales Navigator search URL, scroll through results,
         scrape all lead data across multiple pages, and save to JSON + CSV.
@@ -877,10 +878,28 @@ class SalesNavigatorScraper:
         from bs4 import BeautifulSoup
 
         print(f"\n{'='*60}")
-        print("📋 SCRAPING SALES NAVIGATOR SEARCH RESULTS")
+        print(" SCRAPING SALES NAVIGATOR SEARCH RESULTS")
         print(f"{'='*60}")
 
-        all_leads = []
+        #  Load existing data so we can resume without re-scraping 
+        already_scraped_urls: set = set()
+        if os.path.exists(output_file):
+            try:
+                with open(output_file, 'r', encoding='utf-8') as _f:
+                    _existing = json.load(_f)
+                if isinstance(_existing, list) and _existing:
+                    all_leads = _existing
+                    already_scraped_urls = {r.get('company_url', '') for r in _existing}
+                    print(f" Loaded {len(all_leads)} existing leads from '{output_file}'")
+                    print(f"     Will skip {len(already_scraped_urls)} already-scraped companies")
+                else:
+                    all_leads = []
+            except Exception as _e:
+                print(f"  Could not load existing data from '{output_file}': {_e}")
+                all_leads = []
+        else:
+            all_leads = []
+
         page = 1
 
         # Load the first page via URL, then use Next button clicks for subsequent pages
@@ -892,17 +911,26 @@ class SalesNavigatorScraper:
         )
 
         if already_on_page:
-            print(f"\n📄 Already on search page — skipping navigation, scraping page 1...")
+            print(f"\n Already on search page  skipping navigation, scraping page 1...")
             # Still apply stealth and wait for panel
             self.apply_stealth_after_load()
+            _pre = random.uniform(0.5, 1.0)
+            print(f"   Settling for {_pre:.1f}s before reading results...")
+            time.sleep(_pre)
         else:
-            print(f"\n📄 Loading page 1 — navigating to search URL...")
+            _pre = random.uniform(0.5, 1.0)
+            print(f"   Pre-navigation pause {_pre:.1f}s...")
+            time.sleep(_pre)
+            print(f"\n Loading page 1  navigating to search URL...")
             self.driver.get(search_url)
-            time.sleep(random.uniform(5, 8))
+            time.sleep(random.uniform(0.5, 1.0))
             self.apply_stealth_after_load()
+            _post = random.uniform(0.5, 1.0)
+            print(f"   Post-load settle {_post:.1f}s...")
+            time.sleep(_post)
 
         while page <= max_pages:
-            print(f"\n📄 Scraping page {page}/{max_pages}...")
+            print(f"\n Scraping page {page}/{max_pages}...")
 
             # Wait for results panel to be present (lead search OR account/company search)
             try:
@@ -914,39 +942,42 @@ class SalesNavigatorScraper:
                          '.search-results__results-container')
                     )
                 )
-                print("✅ Results panel loaded")
+                print(" Results panel loaded")
             except Exception:
-                print("⚠️  Results panel not found — page may be empty or blocked")
+                print("  Results panel not found  page may be empty or blocked")
                 break
 
             # Human-like: look around the page first
             self.human_idle(2, 3)
-            time.sleep(random.uniform(1, 2))
+            time.sleep(random.uniform(0.5, 1.0))
 
-            # Scroll the RIGHT side of the page to the bottom (triggers lazy loading)
-            print("🖱️  Scrolling to bottom of results page...")
-            self._scroll_results_panel()
+            # Scroll the RIGHT panel to bottom (triggers lazy loading)
+            # Returns the scroll panel element so we can reuse it for Next-button search
+            print("  Scrolling to bottom of results page...")
+            right_panel = self._scroll_results_panel()
 
-            # Parse the fully rendered DOM after all cards have lazy-loaded
-            soup = BeautifulSoup(self.driver.page_source, 'html.parser')
+            # Click each company card and extract data from the company profile page
+            page_leads, total_on_page = self._click_and_extract_companies(already_scraped_urls)
 
-            # Extract each lead card
-            page_leads = self._extract_leads_from_soup(soup)
-
-            if not page_leads:
-                print(f"⚠️  No leads found on page {page} — stopping.")
+            # Only stop if the page had NO companies at all.
+            # If companies existed but were all already-scraped, keep going to the next page.
+            if total_on_page == 0:
+                print(f"  No companies found on page {page}  stopping.")
                 break
 
-            print(f"✅ Found {len(page_leads)} leads on page {page}")
+            new_count = len(page_leads)
+            print(f" Page {page}: {total_on_page} companies found, {new_count} new leads scraped")
             all_leads.extend(page_leads)
 
             # Stop if we've hit the max pages limit
             if page >= max_pages:
-                print(f"🏁 Reached max pages ({max_pages}) — done.")
+                print(f" Reached max pages ({max_pages})  done.")
                 break
 
-            # ── Step 1: Scroll down and locate the Next button ────────────────
-            # Do this BEFORE asking the user so we know there IS a next page.
+            #  Find Next button 
+            # After _click_and_extract_companies navigates away and back, the
+            # right panel scroll resets to the top.  Re-scroll it to the bottom
+            # so the pagination bar (containing Next) is visible, then click.
             next_selectors = [
                 'button[aria-label="Next"]',
                 'button.artdeco-pagination_button--next',
@@ -954,19 +985,21 @@ class SalesNavigatorScraper:
                 '[data-test-pagination-page-btn="next"]',
                 'button.artdeco-pagination__button--next',
             ]
-            print("\n🔍 Looking for Next button after scraping page...")
-            located_next_btn = self._scroll_until_next_visible(next_selectors)
+            print("\n Re-scrolling panel to find Next button...")
+            # Re-scroll the right panel to its bottom  the Next button lives there
+            right_panel = self._scroll_results_panel()
+            located_next_btn = self._scroll_until_next_visible(next_selectors, scroll_panel=right_panel)
 
             if located_next_btn is None:
-                print("🏁 Next button not found — this is the last page.")
+                print(" Next button not found  this is the last page.")
                 break
 
-            print("✅ Next button is visible on page.")
-            print(f"\n📄 Page {page} scraped  ({len(page_leads)} leads, {len(all_leads)} total so far) — auto-advancing...")
+            print(" Next button is visible on page.")
+            print(f"\n Page {page} scraped  ({len(page_leads)} leads, {len(all_leads)} total so far)  auto-advancing...")
 
-            # ── Step 2: Click the already-located Next button ─────────────────
-            wait = random.uniform(2, 4)
-            print(f"⏳ Waiting {wait:.1f}s before clicking Next...")
+            #  Step 2: Click the already-located Next button 
+            wait = random.uniform(0.5, 1.0)
+            print(f" Waiting {wait:.1f}s before clicking Next...")
             self.human_idle(1, 2)
             time.sleep(wait)
 
@@ -988,18 +1021,18 @@ class SalesNavigatorScraper:
             try:
                 self.cursor.click_on(fresh_btn)
                 click_ok = True
-                print("  🖱️  Clicked Next page button (human cursor)")
+                print("    Clicked Next page button (human cursor)")
             except Exception as ce:
-                print(f"  ⚠️  cursor.click_on failed ({ce}) — trying JS click")
+                print(f"    cursor.click_on failed ({ce})  trying JS click")
                 try:
                     self.driver.execute_script("arguments[0].click();", fresh_btn)
                     click_ok = True
-                    print("  🖱️  Clicked Next page button (JS fallback)")
+                    print("    Clicked Next page button (JS fallback)")
                 except Exception as je:
-                    print(f"  ⚠️  JS click also failed: {je}")
+                    print(f"    JS click also failed: {je}")
 
             if not click_ok:
-                print("  ⚠️  All click strategies failed — stopping.")
+                print("    All click strategies failed  stopping.")
                 break
 
             # Wait for next page to load
@@ -1007,34 +1040,39 @@ class SalesNavigatorScraper:
                 WebDriverWait(self.driver, 15).until(
                     lambda d: d.current_url != current_url
                 )
-                print(f"  ✅ New page loaded: {self.driver.current_url}")
+                print(f"   New page loaded: {self.driver.current_url}")
             except Exception:
-                print("  ℹ️  URL unchanged — waiting for results panel to refresh...")
-                time.sleep(random.uniform(3, 5))
+                print("    URL unchanged  waiting for results panel to refresh...")
+                time.sleep(random.uniform(0.5, 1.0))
 
-            time.sleep(random.uniform(2, 4))
+            _between = random.uniform(0.5, 1.0)
+            print(f"   Between-page pause {_between:.1f}s...")
+            time.sleep(_between)
+            time.sleep(random.uniform(0.5, 1.0))
             self.inject_cursor_overlay()
             page += 1
 
-        # ── Save results ──────────────────────────────────────────────
-        print(f"\n📊 Total leads scraped: {len(all_leads)}")
+        #  Save results 
+        print(f"\n Total leads scraped: {len(all_leads)}")
 
         if all_leads:
             # JSON
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(all_leads, f, indent=2, ensure_ascii=False)
-            print(f"💾 Saved JSON → '{output_file}'")
+            print(f" Saved JSON  '{output_file}'")
 
             # CSV
             csv_file = output_file.replace('.json', '.csv')
-            fieldnames = ['company_name', 'company_url', 'industry', 'employee_count']
+            fieldnames = ['company_name', 'company_url', 'industry',
+                          'city', 'state', 'country',
+                          'employee_count', 'revenue', 'website']
             with open(csv_file, 'w', newline='', encoding='utf-8') as f:
                 writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
                 writer.writeheader()
                 writer.writerows(all_leads)
-            print(f"💾 Saved CSV  → '{csv_file}'")
+            print(f" Saved CSV   '{csv_file}'")
         else:
-            print("❌ No leads were scraped.")
+            print(" No leads were scraped.")
 
         return all_leads
 
@@ -1044,16 +1082,16 @@ class SalesNavigatorScraper:
         lead cards lazy-load.
 
         Sales Navigator uses a split-pane layout: the right panel is its own
-        scrollable container — it only responds to scroll when the mouse is
+        scrollable container  it only responds to scroll when the mouse is
         hovering over it.  Strategy:
           1. Find the first visible lead card.
           2. Move the cursor onto it (mouse now hovers over the right panel).
           3. Use JS to walk up the DOM and find the actual scrollable parent.
           4. Repeatedly scrollBy on that element until scrollHeight stops growing.
         """
-        print("  📜 Scrolling right results panel to bottom (lazy-load)...")
+        print("   Scrolling right results panel to bottom (lazy-load)...")
 
-        # ── Step 1: locate first visible card link (company OR people card) ─────
+        #  Step 1: locate first visible card link (company OR people card) 
         lead_card = None
         for card_sel in [
             'a[data-control-name="view_company_via_result_name"]',      # company/account card
@@ -1063,12 +1101,12 @@ class SalesNavigatorScraper:
                 lead_card = WebDriverWait(self.driver, 6).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, card_sel))
                 )
-                print(f"  ✅ Scroll anchor found via: {card_sel}")
+                print(f"   Scroll anchor found via: {card_sel}")
                 break
             except Exception:
                 continue
 
-        # ── Step 2: move cursor to the right-side panel, vertically centred ──
+        #  Step 2: move cursor to the right-side panel, vertically centred 
         # Sales Navigator is a split-pane layout: the RIGHT half is the
         # scrollable results panel.  The scroll events only register when the
         # mouse is actually hovering over that right pane.
@@ -1080,18 +1118,18 @@ class SalesNavigatorScraper:
             target_x = int(viewport_w * random.uniform(0.75, 0.85))
             target_y = int(viewport_h * random.uniform(0.45, 0.55))
             self.cursor.move_to([target_x, target_y])
-            print(f"  🖱️  Cursor positioned at right-panel centre ({target_x}, {target_y})")
-            time.sleep(random.uniform(0.4, 0.8))
+            print(f"    Cursor positioned at right-panel centre ({target_x}, {target_y})")
+            time.sleep(random.uniform(0.5, 1.0))
         except Exception:
             # Fallback: hover over the first lead card if coordinate move fails
             if lead_card:
                 try:
                     self.cursor.move_to(lead_card)
-                    time.sleep(random.uniform(0.4, 0.8))
+                    time.sleep(random.uniform(0.5, 1.0))
                 except Exception:
                     pass
 
-        # ── Step 3: find the scrollable parent of the lead card via JS ───────
+        #  Step 3: find the scrollable parent of the lead card via JS 
         # Walks up the DOM tree and returns the first element whose computed
         # overflow-y is 'scroll' or 'auto' and whose scrollHeight > clientHeight.
         scroll_panel = None
@@ -1114,16 +1152,16 @@ class SalesNavigatorScraper:
                 pass
 
         if scroll_panel:
-            print("  ✅ Found scrollable right panel via DOM walk")
+            print("   Found scrollable right panel via DOM walk")
         else:
-            print("  ⚠️  Scrollable panel not found — falling back to window scroll")
+            print("    Scrollable panel not found  falling back to window scroll")
 
-        # ── Step 4: gradually scroll to the bottom so every card lazy-loads ────
-        # IMPORTANT: Never jump/teleport — Sales Navigator lazy-loads cards only
+        #  Step 4: gradually scroll to the bottom so every card lazy-loads 
+        # IMPORTANT: Never jump/teleport  Sales Navigator lazy-loads cards only
         # when the viewport scrolls past them.  A forced scrollTop = scrollHeight
         # skips all intermediate cards and loses data.  Always use scrollBy.
         scroll_attempts = 0
-        max_scroll_attempts = 20   # generous — up to ~80 small steps
+        max_scroll_attempts = 20   # generous  up to ~80 small steps
         stable_count = 0           # consecutive checks where height did NOT grow
         STABLE_THRESHOLD = 3       # declare bottom only after 3 stable checks in a row
 
@@ -1159,13 +1197,13 @@ class SalesNavigatorScraper:
 
         st, ch, sh = _get_pos()
         last_height = sh
-        print(f"  ↓ Start: scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
+        print(f"   Start: scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
 
         while scroll_attempts < max_scroll_attempts:
             # Scroll down by a small human-like chunk
             scroll_px = random.randint(200, 380)
             _scroll_down(scroll_px)
-            time.sleep(random.uniform(0.7, 1.4))
+            time.sleep(random.uniform(0.5, 1.0))
 
             # Occasionally nudge the cursor slightly within the right panel
             # so it keeps receiving scroll events (Sales Navigator requires hover)
@@ -1176,17 +1214,17 @@ class SalesNavigatorScraper:
                     nx = int(vw * random.uniform(0.72, 0.88))
                     ny = int(vh * random.uniform(0.40, 0.60))
                     self.cursor.move_to([nx, ny])
-                    time.sleep(random.uniform(0.2, 0.4))
+                    time.sleep(random.uniform(0.5, 1.0))
                 except Exception:
                     pass
 
             st, ch, sh = _get_pos()
             scroll_attempts += 1
-            print(f"  ↓ Scroll {scroll_attempts}: scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
+            print(f"   Scroll {scroll_attempts}: scrollTop={int(st)}, clientH={int(ch)}, scrollH={int(sh)}")
 
             # Check whether new content appeared
             if sh > last_height:
-                # New cards lazy-loaded — reset stable counter and keep going
+                # New cards lazy-loaded  reset stable counter and keep going
                 stable_count = 0
                 last_height = sh
                 continue
@@ -1197,25 +1235,26 @@ class SalesNavigatorScraper:
             if _at_bottom(st, ch, sh):
                 if stable_count >= STABLE_THRESHOLD:
                     # Truly at the bottom and no new content for several steps
-                    print(f"  ↳ Reached true bottom after {scroll_attempts} scrolls "
-                          f"(stable×{stable_count}, scrollTop+clientH={int(st+ch)}, scrollH={int(sh)})")
+                    print(f"   Reached true bottom after {scroll_attempts} scrolls "
+                          f"(stable{stable_count}, scrollTop+clientH={int(st+ch)}, scrollH={int(sh)})")
                     break
                 else:
                     # At bottom but give lazy-load more time before declaring done
-                    print(f"  ↓ At bottom edge — waiting for lazy-load (stable×{stable_count})...")
-                    time.sleep(random.uniform(2.0, 3.0))
+                    print(f"   At bottom edge  waiting for lazy-load (stable{stable_count})...")
+                    time.sleep(random.uniform(0.5, 1.0))
             else:
-                # Not at bottom yet but height is stable — wait a bit and retry
+                # Not at bottom yet but height is stable  wait a bit and retry
                 if stable_count >= STABLE_THRESHOLD:
-                    print(f"  ↓ Height stable for {stable_count} steps — extra wait for lazy-load...")
-                    time.sleep(random.uniform(2.5, 4.0))
+                    print(f"   Height stable for {stable_count} steps  extra wait for lazy-load...")
+                    time.sleep(random.uniform(0.5, 1.0))
                     _, _, sh_new = _get_pos()
                     if sh_new == last_height:
-                        # Still nothing new — keep scrolling normally
+                        # Still nothing new  keep scrolling normally
                         stable_count = 0
 
         st2, ch2, sh2 = _get_pos()
-        print(f"  ✅ Scroll complete — scrollH={int(sh2)}, staying at bottom (scrollTop={int(st2)})")
+        print(f"   Scroll complete  scrollH={int(sh2)}, staying at bottom (scrollTop={int(st2)})")
+        return scroll_panel  # caller can reuse the same panel reference
 
     def _is_element_in_viewport(self, element) -> bool:
         """
@@ -1239,16 +1278,41 @@ class SalesNavigatorScraper:
         except Exception:
             return False
 
-    def _scroll_until_next_visible(self, next_selectors, max_scrolls=15) -> object:
+    def _scroll_until_next_visible(self, next_selectors, max_scrolls=25, scroll_panel=None) -> object:
         """
-        Scroll the page DOWN in increments until the Next button is visible
-        inside the viewport.  Returns the fresh element once visible, or None
-        if the button never appears after max_scrolls attempts.
+        Scroll the RIGHT PANEL (or window as fallback) until the Next button is
+        visible in the viewport.  Returns the element once visible, or None.
 
-        This guarantees HumanCursor always gets an on-screen target, preventing
-        MoveTargetOutOfBoundsException.
+        Sales Navigator's Next button lives at the bottom of the right scroll
+        panel  always scroll THAT panel, not document.body.
         """
-        print("  🔽 Scrolling down until Next button is visible in viewport...")
+        print("scrolling panel to find Next button...")
+
+        def _scroll_down_px(px):
+            if scroll_panel:
+                try:
+                    self.driver.execute_script(
+                        "arguments[0].scrollBy(0, arguments[1]);", scroll_panel, px
+                    )
+                    return
+                except Exception:
+                    pass
+            self.driver.execute_script(f"window.scrollBy(0, {px});")
+
+        def _scroll_to_bottom():
+            if scroll_panel:
+                try:
+                    self.driver.execute_script(
+                        "arguments[0].scrollTo(0, arguments[0].scrollHeight);", scroll_panel
+                    )
+                    return
+                except Exception:
+                    pass
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+        # First jump straight to the very bottom of the panel
+        _scroll_to_bottom()
+        time.sleep(random.uniform(0.5, 1.0))
 
         for attempt in range(1, max_scrolls + 1):
             # Re-fetch on every iteration to avoid stale references
@@ -1263,8 +1327,7 @@ class SalesNavigatorScraper:
                     continue
 
             if btn is None:
-                # XPath fallback — matches the real DOM:
-                #   <button ...><span class="artdeco-button__text">Next</span></button>
+                # XPath fallback
                 try:
                     btn = self.driver.find_element(
                         By.XPATH,
@@ -1274,17 +1337,26 @@ class SalesNavigatorScraper:
                 except Exception:
                     pass
 
-            if btn is not None and self._is_element_in_viewport(btn):
-                print(f"  ✅ Next button visible in viewport after {attempt} scroll(s)")
-                return btn
+            if btn is not None:
+                # Scroll the button into view then verify it is on-screen
+                try:
+                    self.driver.execute_script(
+                        "arguments[0].scrollIntoView({block:'center'});", btn
+                    )
+                    time.sleep(random.uniform(0.5, 1.0))
+                except Exception:
+                    pass
+                if self._is_element_in_viewport(btn):
+                    print(f"   Next button visible in viewport after {attempt} scroll(s)")
+                    return btn
 
-            # Not visible yet — scroll down a bit and retry
-            scroll_px = random.randint(200, 400)
-            self.driver.execute_script(f"window.scrollBy(0, {scroll_px});")
-            print(f"  ↓ Scroll attempt {attempt}/{max_scrolls} (+{scroll_px}px)...")
-            time.sleep(random.uniform(0.6, 1.1))
+            # Not visible yet  nudge down a bit and retry
+            scroll_px = random.randint(150, 300)
+            _scroll_down_px(scroll_px)
+            print(f"   Scroll attempt {attempt}/{max_scrolls} (+{scroll_px}px)...")
+            time.sleep(random.uniform(0.5, 1.0))
 
-        print(f"  ⚠️  Next button not visible after {max_scrolls} scroll attempts")
+        print(f"    Next button not visible after {max_scrolls} scroll attempts")
         return None
 
     def _click_next_page(self):
@@ -1301,27 +1373,27 @@ class SalesNavigatorScraper:
         #   </button>
         # NOTE: single underscore  artdeco-pagination_button  (NOT double __)
         next_selectors = [
-            'button[aria-label="Next"]',                       # most reliable — aria label
+            'button[aria-label="Next"]',                       # most reliable  aria label
             'button.artdeco-pagination_button--next',          # real class (single underscore)
             'button.artdeco-pagination_button[aria-label]',    # pagination btn with any aria
             '[data-test-pagination-page-btn="next"]',          # test-id fallback
             'button.artdeco-pagination__button--next',         # legacy double-underscore variant
         ]
 
-        # ── Step 1: Scroll down until the Next button is visible ─────────────
+        #  Step 1: Scroll down until the Next button is visible 
         # Keep scrolling in a loop; only stop when the button's bounding rect
         # is fully inside the viewport.  This guarantees HumanCursor can draw
         # a valid trajectory to it without MoveTargetOutOfBoundsException.
         visible_btn = self._scroll_until_next_visible(next_selectors)
 
         if visible_btn is None:
-            print("  ℹ️  No Next button found — likely on the last page")
+            print("    No Next button found  likely on the last page")
             return False
 
         try:
             current_url = self.driver.current_url
 
-            # ── Step 2: Re-fetch one final time right before clicking ─────────
+            #  Step 2: Re-fetch one final time right before clicking 
             # The scrolling may have triggered a React re-render, so re-query
             # to get the absolute freshest DOM reference before the click.
             fresh_btn = None
@@ -1337,68 +1409,313 @@ class SalesNavigatorScraper:
                 fresh_btn = visible_btn  # fallback to what we already have
 
             # Short pause so the page settles after scrolling
-            time.sleep(random.uniform(0.4, 0.8))
+            time.sleep(random.uniform(0.5, 1.0))
 
-            # ── Step 3: Primary click — HumanCursor ───────────────────────────
+            #  Step 3: Primary click  HumanCursor 
             click_ok = False
             try:
                 self.cursor.click_on(fresh_btn)
                 click_ok = True
-                print("  🖱️  Clicked Next page button (human cursor)")
+                print("    Clicked Next page button (human cursor)")
             except Exception as ce:
-                print(f"  ⚠️  cursor.click_on failed ({ce}) — trying JS click")
+                print(f"    cursor.click_on failed ({ce})  trying JS click")
 
-            # ── Step 4: Fallback click — JavaScript ───────────────────────────
+            #  Step 4: Fallback click  JavaScript 
             if not click_ok:
                 try:
                     self.driver.execute_script("arguments[0].click();", fresh_btn)
                     click_ok = True
-                    print("  🖱️  Clicked Next page button (JS fallback)")
+                    print("    Clicked Next page button (JS fallback)")
                 except Exception as je:
-                    print(f"  ⚠️  JS click also failed: {je}")
+                    print(f"    JS click also failed: {je}")
 
             if not click_ok:
-                print("  ⚠️  All click strategies failed for Next button")
+                print("    All click strategies failed for Next button")
                 return False
 
-            # ── Step 5: Wait for the page to advance ──────────────────────────
+            #  Step 5: Wait for the page to advance 
             try:
                 WebDriverWait(self.driver, 15).until(
                     lambda d: d.current_url != current_url
                 )
-                print(f"  ✅ New page loaded: {self.driver.current_url}")
+                print(f"   New page loaded: {self.driver.current_url}")
             except Exception:
-                # SPA in-place update — URL stays the same, results panel swaps
-                print("  ℹ️  URL unchanged — waiting for results panel to refresh...")
-                time.sleep(random.uniform(3, 5))
+                # SPA in-place update  URL stays the same, results panel swaps
+                print("    URL unchanged  waiting for results panel to refresh...")
+                time.sleep(random.uniform(0.5, 1.0))
 
-            time.sleep(random.uniform(2, 4))
+            time.sleep(random.uniform(0.5, 1.0))
             self.inject_cursor_overlay()
             return True
 
         except Exception as e:
-            print(f"  ⚠️  Next button click failed: {e}")
+            print(f"    Next button click failed: {e}")
 
-        print("  ℹ️  No Next button found — likely on the last page")
+        print("    No Next button found  likely on the last page")
         return False
+
+    def _click_and_extract_companies(self, already_scraped_urls: set = None):
+        """
+        On the current search results page:
+          1. Collect all company name links (href + name) from the rendered HTML.
+          2. For each company, navigate to its Sales Navigator profile page.
+          3. Extract company name and employee count (+ industry) from the profile.
+          4. Navigate back to the search results and wait for them to reload.
+        Returns a list of dicts: company_name, company_url, industry, employee_count.
+        """
+        import re
+        from bs4 import BeautifulSoup
+
+        records = []
+        search_url = self.driver.current_url
+
+        #  Step 1: Snapshot current page and collect all company links 
+        soup = BeautifulSoup(self.driver.page_source, 'html.parser')
+        raw_links = soup.find_all(
+            'a', attrs={'data-control-name': 'view_company_via_result_name'}
+        )
+
+        companies_to_visit = []
+        for lnk in raw_links:
+            name = lnk.get_text(strip=True)
+            href = lnk.get('href', '').split('?')[0]  # strip query-string
+            url  = f"https://www.linkedin.com{href}" if href.startswith('/') else href
+            if name and url:
+                companies_to_visit.append((name, url))
+
+        total_on_page = len(companies_to_visit)
+        print(f"   Found {total_on_page} companies on this page  visiting each one...")
+
+        #  Step 2: Visit each company page and extract 
+        for idx, (name, url) in enumerate(companies_to_visit, 1):
+            if already_scraped_urls and url in already_scraped_urls:
+                print(f"    [{idx}/{total_on_page}] Skipping (already scraped): {name}")
+                continue
+            record = {
+                'company_name'  : name,
+                'company_url'   : url,
+                'industry'      : '',
+                'city'          : '',
+                'state'         : '',
+                'country'       : '',
+                'employee_count': '',
+                'revenue'       : '',
+                'website'       : '',
+            }
+            print(f"   [{idx}/{total_on_page}] Visiting: {name}")
+
+            try:
+                # Pre-click jitter  looks human, not sequential
+                _jitter = random.uniform(0.5, 1.0)
+                print(f"      Pre-click pause {_jitter:.1f}s...")
+                time.sleep(_jitter)
+
+                #  Find the live anchor element and CLICK it 
+                # Re-query the DOM each time (React may have re-rendered after back())
+                # If the element isn't immediately visible, scroll down until it is.
+                _MAX_FIND_SCROLLS = 20
+                target_el = None
+                for _scroll_attempt in range(_MAX_FIND_SCROLLS):
+                    live_links = self.driver.find_elements(
+                        By.CSS_SELECTOR, 'a[data-control-name="view_company_via_result_name"]'
+                    )
+                    for el in live_links:
+                        el_href = (el.get_attribute('href') or '').split('?')[0]
+                        if url in el_href or el_href in url:
+                            target_el = el
+                            break
+
+                    if target_el is not None:
+                        break  # found it  stop scrolling
+
+                    _scroll_px = random.randint(250, 450)
+                    self.driver.execute_script(f"window.scrollBy(0, {_scroll_px});")
+                    print(f"Element not yet visible scroll attempt {_scroll_attempt + 1}/{_MAX_FIND_SCROLLS} (+{_scroll_px}px)...")
+                    time.sleep(random.uniform(0.5, 1.0))
+
+                if target_el:
+                    # Scroll the element into view so the click lands properly
+                    self.driver.execute_script(
+                        "arguments[0].scrollIntoView({block:'center'});", target_el
+                    )
+                    time.sleep(random.uniform(0.5, 1.0))
+                    try:
+                        self.cursor.click_on(target_el)
+                        print(f"       Clicked (human cursor): {name}")
+                    except Exception as _ce:
+                        print(f"       Human cursor click failed ({_ce})  JS fallback")
+                        self.driver.execute_script("arguments[0].click();", target_el)
+                        print(f"       Clicked (JS): {name}")
+                    # Wait for the page to navigate away from the search results
+                    try:
+                        WebDriverWait(self.driver, 15).until(
+                            lambda d: d.current_url != search_url
+                        )
+                    except Exception:
+                        pass  # may already be on the profile page
+                else:
+                    # Last resort: scrolled {_MAX_FIND_SCROLLS} times and still not found
+                    print(f"       Element not found after {_MAX_FIND_SCROLLS} scrolls  falling back to URL injection")
+                    self.driver.get(url)
+
+                time.sleep(random.uniform(0.5, 1.0))
+                self.inject_cursor_overlay()
+                self.human_idle(1, 2)
+
+                # Let the page breathe before reading DOM
+                _read_pause = random.uniform(0.5, 1.0)
+                print(f"      Page-read settle {_read_pause:.1f}s...")
+                time.sleep(_read_pause)
+
+                pg = BeautifulSoup(self.driver.page_source, 'html.parser')
+
+                #  Company name (override with the profile page heading) 
+                _LINKEDIN_BOILERPLATE = (
+                    "This estimate is based on activity as reported by "
+                    "LinkedIn members employed at this company."
+                )
+                for name_sel in [
+                    'h1',
+                    '[data-anonymize="company-name"]',
+                    '.artdeco-entity-lockup_title',
+                    '.artdeco-entity-lockup__title',
+                ]:
+                    el = pg.select_one(name_sel)
+                    if el:
+                        txt = el.get_text(strip=True)
+                        # Strip known boilerplate text LinkedIn injects into headings
+                        txt = txt.replace(_LINKEDIN_BOILERPLATE, '').strip()
+                        if txt:
+                            record['company_name'] = txt
+                            break
+
+                #  Industry 
+                industry_el = pg.find('span', attrs={'data-anonymize': 'industry'})
+                if industry_el:
+                    record['industry'] = industry_el.get_text(strip=True)
+                time.sleep(random.uniform(0.5, 1.0))
+
+                #  Location  city / state / country 
+                # DOM: <div data-anonymize="location">City, State, Country</div>
+                loc_el = pg.find(attrs={'data-anonymize': 'location'})
+                if loc_el:
+                    parts = [p.strip() for p in loc_el.get_text(strip=True).split(',')]
+                    if len(parts) >= 3:
+                        record['city']    = parts[0]
+                        record['state']   = parts[1]
+                        record['country'] = ', '.join(parts[2:])
+                    elif len(parts) == 2:
+                        record['city']    = parts[0]
+                        record['country'] = parts[1]
+                    elif len(parts) == 1:
+                        record['country'] = parts[0]
+
+                time.sleep(random.uniform(0.5, 1.0))
+
+                #  Employee count 
+                # Method A: text / aria-label on the company-size link
+                emp_lnk = pg.find('a', attrs={'data-anonymize': 'company-size'})
+                if emp_lnk:
+                    # Try the visible link-text span first
+                    span = emp_lnk.find(class_=lambda c: c and 'link-text' in c)
+                    if span:
+                        m = re.search(r'([\d,]+)', span.get_text(strip=True))
+                        if m:
+                            record['employee_count'] = int(m.group(1).replace(',', ''))
+                    if not record['employee_count']:
+                        aria = emp_lnk.get('aria-label', '')
+                        m = re.search(r'([\d,]+)', aria)
+                        if m:
+                            record['employee_count'] = int(m.group(1).replace(',', ''))
+
+                # Method B: scan full page text for "X employees" pattern
+                if not record['employee_count']:
+                    pg_text = pg.get_text(' ', strip=True)
+                    for pattern in [
+                        r'View\s+all\s+([\d,]+)\s+employees?',
+                        r'([\d,]+)\s+employees?\s+on\s+LinkedIn',
+                        r'([\d,]+)\s+employees?',
+                    ]:
+                        m = re.search(pattern, pg_text, re.I)
+                        if m:
+                            record['employee_count'] = int(m.group(1).replace(',', ''))
+                            break
+
+                time.sleep(random.uniform(0.5, 1.0))
+                rev_el = pg.find('span', attrs={'data-anonymize': 'revenue'})
+                if rev_el:
+                    record['revenue'] = rev_el.get_text(strip=True)
+                time.sleep(random.uniform(0.5, 1.0))
+
+                #  Website URL 
+                # DOM: <a data-control-name="visit_company_website" href="http://...">
+                web_lnk = pg.find('a', attrs={'data-control-name': 'visit_company_website'})
+                if web_lnk:
+                    record['website'] = web_lnk.get('href', '')
+
+                print(f"      {record['company_name']} | "
+                      f"{record['employee_count']} emp | "
+                      f"{record['city']}, {record['state']}, {record['country']} | "
+                      f"rev: {record['revenue']} | {record['website']}")
+
+            except Exception as exc:
+                print(f"       Error visiting {name}: {exc}")
+
+            records.append(record)
+
+
+            _back_pre = random.uniform(0.5, 1.0)
+            print(f"      Pre-back pause {_back_pre:.1f}s...")
+            time.sleep(_back_pre)
+            try:
+                self.driver.back()
+                # Wait for the results panel to be visible again
+                WebDriverWait(self.driver, 15).until(
+                    EC.presence_of_element_located((
+                        By.CSS_SELECTOR,
+                        '[data-sn-view-name="module-lead-search-results"],'
+                        '[data-sn-view-name="module-account-search-results"],'
+                        '.search-results__results-container'
+                    ))
+                )
+                self.inject_cursor_overlay()
+            except Exception:
+                # If back() doesn't restore results, reload the search URL
+                try:
+                    self.driver.get(search_url)
+                    WebDriverWait(self.driver, 15).until(
+                        EC.presence_of_element_located((
+                            By.CSS_SELECTOR,
+                            '[data-sn-view-name="module-lead-search-results"],'
+                            '[data-sn-view-name="module-account-search-results"],'
+                            '.search-results__results-container'
+                        ))
+                    )
+                    self.inject_cursor_overlay()
+                except Exception:
+                    pass
+
+            # Human-like pause between companies (13 s)
+            _between_co = random.uniform(0.5, 1.0)
+            print(f"      Between-company pause {_between_co:.1f}s...")
+            time.sleep(_between_co)
+
+        return records, total_on_page
 
     def _extract_leads_from_soup(self, soup):
         """
         Parse BeautifulSoup HTML and extract company data from account search result cards.
 
         Each card yields:
-          company_name    – display name of the company
-          company_url     – full Sales Navigator company profile URL
-          industry        – industry label (e.g. "Information Technology & Services")
-          employee_count  – integer employee count parsed from the aria-label
-                            (e.g. "View all 122 employees …" → 122), or '' if unavailable
+          company_name     display name of the company
+          company_url      full Sales Navigator company profile URL
+          industry         industry label (e.g. "Information Technology & Services")
+          employee_count   integer employee count parsed from the aria-label
+                            (e.g. "View all 122 employees "  122), or '' if unavailable
         """
         import re
         leads = []
 
-        # ── Anchor: every company card has this data-control-name ─────────────
-        # <a data-control-name="view_company_via_result_name"
-        #    href="/sales/company/70292136?...">Stier Solutions Inc</a>
         company_links = soup.find_all(
             'a',
             attrs={'data-control-name': 'view_company_via_result_name'}
@@ -1407,10 +1724,9 @@ class SalesNavigatorScraper:
         for link in company_links:
             record = {}
 
-            # ── Company name ──────────────────────────────────────────────────
             record['company_name'] = link.get_text(strip=True)
 
-            # ── Company URL ───────────────────────────────────────────────────
+            #  Company URL 
             href = link.get('href', '')
             # Strip query-string noise so the URL is clean but still valid
             base_href = href.split('?')[0]
@@ -1420,7 +1736,6 @@ class SalesNavigatorScraper:
                 else base_href
             )
 
-            # ── Walk up to the lockup content container ───────────────────────
             # Sales Navigator uses single-underscore BEM:
             #   artdeco-entity-lockup_content  (NOT double-underscore)
             # Try both variants for robustness.
@@ -1440,16 +1755,12 @@ class SalesNavigatorScraper:
                 )
 
                 if subtitle:
-                    # ── Industry ──────────────────────────────────────────────
                     industry_span = subtitle.find(
                         'span', attrs={'data-anonymize': 'industry'}
                     )
                     if industry_span:
                         record['industry'] = industry_span.get_text(strip=True)
 
-                    # ── Employee count ────────────────────────────────────────
-                    # <a data-anonymize="company-size"
-                    #    aria-label="View all 122 employees at … on LinkedIn">
                     emp_link = subtitle.find(
                         'a', attrs={'data-anonymize': 'company-size'}
                     )
@@ -1488,27 +1799,25 @@ class SalesNavigatorScraper:
             with open(filename, 'w', encoding='utf-8') as f:
                 f.write(rendered_html)
 
-            print(f"✅ Full page HTML saved to '{filename}' ({len(rendered_html):,} characters)")
+            print(f" Full page HTML saved to '{filename}' ({len(rendered_html):,} characters)")
             return filename
         except Exception as e:
-            print(f"❌ Failed to save HTML: {e}")
+            print(f" Failed to save HTML: {e}")
             return None
 
 # ==================== MAIN EXECUTION ====================
 
 if __name__ == "__main__":
     print("""
-    ╔══════════════════════════════════════════════════════════╗
-    ║     LINKEDIN SALES NAVIGATOR ACCESS VERIFIER             ║
-    ╚══════════════════════════════════════════════════════════╝
+         LINKEDIN SALES NAVIGATOR ACCESS VERIFIER             
     """)
     
     COOKIE_FILE = 'linkedin_cookies.json'
     
     # Check if cookie file exists
     if not os.path.exists(COOKIE_FILE):
-        print(f"❌ Cookie file '{COOKIE_FILE}' not found!")
-        print("\n📌 First time setup:")
+        print(f" Cookie file '{COOKIE_FILE}' not found!")
+        print("\n First time setup:")
         print("   1. Open Chrome and go to https://www.linkedin.com/sales")
         print("   2. Log into your Sales Navigator account")
         print("   3. Install 'EditThisCookie' from Chrome Web Store")
@@ -1520,3 +1829,4 @@ if __name__ == "__main__":
     # Run the verifier
     scraper = SalesNavigatorScraper(COOKIE_FILE)
     scraper.run_verification()
+
