@@ -1,4 +1,4 @@
-﻿import undetected_chromedriver as uc
+import undetected_chromedriver as uc
 import json
 import time
 import random
@@ -7,6 +7,8 @@ import tempfile
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 from humancursor import WebCursor
 
 class SalesNavigatorScraper:
@@ -920,12 +922,19 @@ class SalesNavigatorScraper:
         output_file = f"{_base}_{_ts}.json"
         csv_file    = output_file.replace('.json', '.csv')
 
+        # Dedicated websites CSV saved inside the linkedin/ folder
+        _linkedin_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'linkedin')
+        os.makedirs(_linkedin_dir, exist_ok=True)
+        websites_csv = os.path.join(_linkedin_dir, f'websites_{_ts}.csv')
+        _websites_fieldnames = ['company_name', 'website', 'company_url']
+
         print(f"\n{'='*60}")
         print(" SCRAPING SALES NAVIGATOR SEARCH RESULTS")
         print(f"{'='*60}")
         print(f"\n  New output files for this run:")
-        print(f"    JSON : {output_file}")
-        print(f"    CSV  : {csv_file}")
+        print(f"    JSON     : {output_file}")
+        print(f"    CSV      : {csv_file}")
+        print(f"    Websites : {websites_csv}")
         print(f"{'='*60}")
 
         # CSV header written once at the start
@@ -934,6 +943,10 @@ class SalesNavigatorScraper:
                            'employee_count', 'revenue', 'website']
         with open(csv_file, 'w', newline='', encoding='utf-8') as _cf:
             csv.DictWriter(_cf, fieldnames=_csv_fieldnames, extrasaction='ignore').writeheader()
+
+        # Websites CSV header
+        with open(websites_csv, 'w', newline='', encoding='utf-8') as _wf:
+            csv.DictWriter(_wf, fieldnames=_websites_fieldnames, extrasaction='ignore').writeheader()
 
         # Empty JSON list to start
         with open(output_file, 'w', encoding='utf-8') as _jf:
@@ -1055,11 +1068,16 @@ class SalesNavigatorScraper:
                 # JSON: rewrite full list so file is always valid
                 with open(output_file, 'w', encoding='utf-8') as _jf:
                     json.dump(all_leads, _jf, indent=2, ensure_ascii=False)
-                # CSV: append rows (no header, file already has header)
+                # Full CSV: append rows (no header, file already has header)
                 with open(csv_file, 'a', newline='', encoding='utf-8') as _cf:
                     _w = csv.DictWriter(_cf, fieldnames=_csv_fieldnames, extrasaction='ignore')
                     _w.writerows(page_leads)
+                # Websites-only CSV: append company_name + website + company_url
+                with open(websites_csv, 'a', newline='', encoding='utf-8') as _wf:
+                    _ww = csv.DictWriter(_wf, fieldnames=_websites_fieldnames, extrasaction='ignore')
+                    _ww.writerows(page_leads)
                 print(f"  Appended {new_count} leads -> {output_file} ({len(all_leads)} total)")
+                print(f"  Websites saved -> {websites_csv}")
 
             # Stop if we've hit the max pages limit
             if page >= max_pages:
@@ -1482,9 +1500,12 @@ class SalesNavigatorScraper:
         """
         Extract company data in two steps per company:
           1. Parse card HTML (instant, no navigation) for basic fields.
-          2. Open the company profile URL in a NEW TAB, extract richer fields
-             (revenue, website, industry, location, employee count), then CLOSE
-             the tab and switch back -- search results tab is never disturbed.
+          2. Find the LIVE DOM element for the company name link and click it
+             with the human cursor.  Handles both new-tab and same-tab navigation
+             automatically.  Falls back to JS window.open() when the live element
+             cannot be located.  After extracting richer profile data the method
+             either closes the new tab or calls driver.back() so the search-results
+             tab is always restored before the next company.
 
         Returns (records, total_on_page).
         """
@@ -1509,10 +1530,11 @@ class SalesNavigatorScraper:
                 companies_on_page.append((name, url, lnk))
 
         total_on_page = len(companies_on_page)
-        print(f"   Found {total_on_page} companies on this page -- opening each in new tab...")
+        print(f"   Found {total_on_page} companies on this page -- clicking through each...")
 
-        # Remember the search results tab so we can always switch back
+        # Remember the search results tab and URL so we can always return
         search_tab = self.driver.current_window_handle
+        search_url_snapshot = self.driver.current_url
 
         for idx, (name, url, lnk) in enumerate(companies_on_page, 1):
             if already_scraped_urls and url in already_scraped_urls:
@@ -1605,20 +1627,190 @@ class SalesNavigatorScraper:
                 record['website'] = web_lnk.get('href', '')
 
             # ----------------------------------------------------------------
-            # Step 2: open company profile in a NEW TAB, extract richer data,
-            # close the tab, switch back to search results -- tab never navigates
+            # Step 2: Click the company name link with the human cursor.
+            # Handles new-tab and same-tab (SPA) navigation.
+            # Falls back to JS window.open() when the live element is missing.
             # ----------------------------------------------------------------
+            opened_new_tab = False
             try:
-                # Open new tab and navigate to company profile
-                self.driver.execute_script("window.open(arguments[0], '_blank');", url)
-                time.sleep(random.uniform(0.5, 1.0))
+                # Snapshot the current URL so we can return to it if needed
+                search_url_current = self.driver.current_url
+                handles_before = set(self.driver.window_handles)
 
-                # Switch to the newly opened tab
-                all_tabs = self.driver.window_handles
-                new_tab = [t for t in all_tabs if t != search_tab][-1]
-                self.driver.switch_to.window(new_tab)
+                # -- Locate the live Selenium element for this company link --
+                # The href contains the company ID, e.g. /sales/company/1204628
+                company_id = url.replace('https://www.linkedin.com', '').split('?')[0]
+                live_link = None
 
-                # Wait for the page to load
+                for css in [
+                    f'a[data-control-name="view_company_via_result_name"][href*="{company_id}"]',
+                    f'a[data-control-name="view_company_via_result_name"][href*="{company_id.split("/")[-1]}"]',
+                ]:
+                    try:
+                        els = self.driver.find_elements(By.CSS_SELECTOR, css)
+                        if els:
+                            live_link = els[0]
+                            break
+                    except Exception:
+                        continue
+
+                # XPath fallback: match by visible text
+                if not live_link:
+                    try:
+                        escaped_name = name.replace('"', '&quot;')
+                        live_link = self.driver.find_element(
+                            By.XPATH,
+                            f'//a[@data-control-name="view_company_via_result_name" and normalize-space(.)="{escaped_name}"]'
+                        )
+                        print(f"    Found '{name}' via XPath text match")
+                    except Exception:
+                        pass
+
+                # Scroll-to-find: if still not found, scroll the RIGHT results
+                # panel (the same scrollable container used by _scroll_results_panel)
+                # incrementally until the element appears in the live DOM.
+                if not live_link:
+                    print(f"    Element not in viewport for '{name}' -- scrolling right panel to find it...")
+
+                    # -- Locate the scrollable right panel (same logic as _scroll_results_panel) --
+                    _find_panel = None
+                    for _card_sel in [
+                        'a[data-control-name="view_company_via_result_name"]',
+                        'a[data-control-name="view_lead_panel_via_search_lead_name"]',
+                    ]:
+                        try:
+                            _anchor = self.driver.find_element(By.CSS_SELECTOR, _card_sel)
+                            _find_panel = self.driver.execute_script("""
+                                var el = arguments[0];
+                                while (el && el !== document.body) {
+                                    var style = window.getComputedStyle(el);
+                                    var oy = style.overflowY;
+                                    if ((oy === 'scroll' || oy === 'auto') &&
+                                            el.scrollHeight > el.clientHeight) {
+                                        return el;
+                                    }
+                                    el = el.parentElement;
+                                }
+                                return null;
+                            """, _anchor)
+                            if _find_panel:
+                                break
+                        except Exception:
+                            continue
+
+                    # Move cursor to the right panel so scroll events register
+                    try:
+                        vw = self.driver.execute_script("return window.innerWidth")
+                        vh = self.driver.execute_script("return window.innerHeight")
+                        _cx = int(vw * random.uniform(0.75, 0.85))
+                        _cy = int(vh * random.uniform(0.45, 0.55))
+                        self.cursor.move_to([_cx, _cy])
+                        time.sleep(random.uniform(0.3, 0.5))
+                    except Exception:
+                        pass
+
+                    # Reset the panel scroll to the top first, then scroll down step by step
+                    if _find_panel:
+                        try:
+                            self.driver.execute_script("arguments[0].scrollTo(0, 0);", _find_panel)
+                        except Exception:
+                            pass
+                        _sh = self.driver.execute_script("return arguments[0].scrollHeight;", _find_panel)
+                    else:
+                        self.driver.execute_script("window.scrollTo(0, 0);")
+                        _sh = self.driver.execute_script("return document.body.scrollHeight;")
+
+                    scroll_step = 300
+                    max_scrolls = max(1, int(_sh / scroll_step) + 5)
+
+                    for _s in range(max_scrolls):
+                        # Scroll the right panel (or window as fallback)
+                        if _find_panel:
+                            self.driver.execute_script(
+                                "arguments[0].scrollBy(0, arguments[1]);", _find_panel, scroll_step
+                            )
+                        else:
+                            self.driver.execute_script(f"window.scrollBy(0, {scroll_step});")
+                        time.sleep(random.uniform(0.3, 0.5))
+
+                        # Occasionally nudge the cursor to keep hover on right panel
+                        if random.random() < 0.3:
+                            try:
+                                _nx = int(vw * random.uniform(0.72, 0.88))
+                                _ny = int(vh * random.uniform(0.40, 0.60))
+                                self.cursor.move_to([_nx, _ny])
+                                time.sleep(random.uniform(0.2, 0.4))
+                            except Exception:
+                                pass
+
+                        # Re-try CSS selectors
+                        for css in [
+                            f'a[data-control-name="view_company_via_result_name"][href*="{company_id}"]',
+                            f'a[data-control-name="view_company_via_result_name"][href*="{company_id.split("/")[-1]}"]',
+                        ]:
+                            try:
+                                els = self.driver.find_elements(By.CSS_SELECTOR, css)
+                                if els:
+                                    live_link = els[0]
+                                    break
+                            except Exception:
+                                continue
+
+                        # Re-try XPath by name
+                        if not live_link:
+                            try:
+                                escaped_name = name.replace('"', '&quot;')
+                                live_link = self.driver.find_element(
+                                    By.XPATH,
+                                    f'//a[@data-control-name="view_company_via_result_name" and normalize-space(.)="{escaped_name}"]'
+                                )
+                            except Exception:
+                                pass
+
+                        if live_link:
+                            print(f"    Found '{name}' after {_s + 1} scroll step(s) in right panel")
+                            break
+
+                if live_link:
+                    # Scroll into view so cursor coordinates map correctly
+                    self.driver.execute_script(
+                        "arguments[0].scrollIntoView({block: 'center'});", live_link
+                    )
+                    time.sleep(random.uniform(0.4, 0.7))
+
+                    # Human cursor click
+                    try:
+                        self.cursor.click_on(live_link)
+                        print(f"    [{idx}/{total_on_page}] Clicked company: '{name}'")
+                    except Exception as ce:
+                        print(f"    cursor.click_on failed ({ce}) -- JS click fallback")
+                        self.driver.execute_script("arguments[0].click();", live_link)
+
+                    time.sleep(random.uniform(1.0, 1.8))
+
+                    # Detect navigation type: new tab vs same-tab SPA navigation
+                    handles_after = set(self.driver.window_handles)
+                    new_handles = handles_after - handles_before
+                    opened_new_tab = bool(new_handles)
+
+                    if opened_new_tab:
+                        new_tab_handle = list(new_handles)[0]
+                        self.driver.switch_to.window(new_tab_handle)
+                        print(f"    Switched to new tab for '{name}'")
+                    else:
+                        print(f"    Same-tab SPA navigation to '{name}'")
+
+                else:
+                    # Fallback: JS window.open()
+                    print(f"    [{idx}/{total_on_page}] Live element not found for '{name}' -- using JS fallback")
+                    self.driver.execute_script("window.open(arguments[0], '_blank');", url)
+                    time.sleep(random.uniform(0.5, 1.0))
+                    all_tabs = self.driver.window_handles
+                    fallback_tab = [t for t in all_tabs if t != search_tab][-1]
+                    self.driver.switch_to.window(fallback_tab)
+                    opened_new_tab = True
+
+                # -- Wait for the company profile page to fully load --
                 try:
                     WebDriverWait(self.driver, 10).until(
                         lambda d: d.execute_script("return document.readyState") == "complete"
@@ -1626,8 +1818,10 @@ class SalesNavigatorScraper:
                 except Exception:
                     pass
                 time.sleep(random.uniform(0.5, 1.0))
+                self.inject_cursor_overlay()
+                self.human_idle(1, 2)
 
-                # Parse the company profile page
+                # -- Parse the company profile page --
                 psoup = BeautifulSoup(self.driver.page_source, 'html.parser')
 
                 # Revenue
@@ -1644,11 +1838,27 @@ class SalesNavigatorScraper:
                     if m:
                         record['revenue'] = m.group(1).strip()
 
-                # Website
+                # Website -- primary: live Selenium DOM (most reliable after JS render)
+                if not record['website']:
+                    try:
+                        live_web = self.driver.find_element(
+                            By.CSS_SELECTOR,
+                            'a[data-control-name="visit_company_website"]'
+                        )
+                        href_val = live_web.get_attribute('href') or ''
+                        if href_val and 'linkedin.com' not in href_val:
+                            record['website'] = href_val
+                            print(f"    Website (live DOM): {href_val}")
+                    except Exception:
+                        pass
+                # Fallback: BeautifulSoup parse
                 if not record['website']:
                     web_p = psoup.find('a', attrs={'data-control-name': 'visit_company_website'})
                     if web_p:
-                        record['website'] = web_p.get('href', '')
+                        h = web_p.get('href', '')
+                        if h and 'linkedin.com' not in h:
+                            record['website'] = h
+                # Last resort: first external link on profile page
                 if not record['website']:
                     for a in psoup.find_all('a', href=True):
                         h = a['href']
@@ -1698,18 +1908,46 @@ class SalesNavigatorScraper:
                             record['country'] = parts[0]
 
             except Exception as tab_err:
-                print(f"   [{idx}/{total_on_page}] Tab error for {name}: {tab_err}")
+                print(f"   [{idx}/{total_on_page}] Navigation error for '{name}': {tab_err}")
             finally:
-                # Always close the new tab and switch back to search results
-                try:
-                    if self.driver.current_window_handle != search_tab:
-                        self.driver.close()
-                except Exception:
-                    pass
-                try:
-                    self.driver.switch_to.window(search_tab)
-                except Exception:
-                    pass
+                # -- Return to search results --
+                if opened_new_tab:
+                    # Close the company profile tab and switch back
+                    try:
+                        if self.driver.current_window_handle != search_tab:
+                            self.driver.close()
+                    except Exception:
+                        pass
+                    try:
+                        self.driver.switch_to.window(search_tab)
+                    except Exception:
+                        pass
+                else:
+                    # Same-tab SPA: press Alt+Left Arrow (human keyboard back gesture)
+                    try:
+                        time.sleep(random.uniform(0.3, 0.6))  # brief pause before pressing
+                        ActionChains(self.driver) \
+                            .key_down(Keys.ALT) \
+                            .send_keys(Keys.ARROW_LEFT) \
+                            .key_up(Keys.ALT) \
+                            .perform()
+                        print(f"    Pressed Alt+Left to go back to search results")
+                        WebDriverWait(self.driver, 15).until(
+                            EC.presence_of_element_located(
+                                (By.CSS_SELECTOR,
+                                 'a[data-control-name="view_company_via_result_name"]')
+                            )
+                        )
+                        time.sleep(random.uniform(0.5, 1.0))
+                        self.inject_cursor_overlay()
+                    except Exception:
+                        # Hard fallback: re-navigate to the search URL
+                        try:
+                            self.driver.get(search_url_current)
+                            time.sleep(random.uniform(1.5, 2.5))
+                            self.apply_stealth_after_load()
+                        except Exception:
+                            pass
 
             print(f"   [{idx}/{total_on_page}] {record['company_name']} | "
                   f"{record['employee_count']} emp | "
