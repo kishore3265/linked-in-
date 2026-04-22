@@ -1,0 +1,1860 @@
+([('LinkedIn_Scraper.exe',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\build\\LinkedIn_Scraper\\LinkedIn_Scraper.exe',
+   'EXECUTABLE'),
+  ('selenium\\webdriver\\common\\windows\\selenium-manager.exe',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\windows\\selenium-manager.exe',
+   'BINARY'),
+  ('python313.dll', 'C:\\Program Files\\Python313\\python313.dll', 'BINARY'),
+  ('_lzma.pyd', 'C:\\Program Files\\Python313\\DLLs\\_lzma.pyd', 'EXTENSION'),
+  ('_bz2.pyd', 'C:\\Program Files\\Python313\\DLLs\\_bz2.pyd', 'EXTENSION'),
+  ('_decimal.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('unicodedata.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('select.pyd', 'C:\\Program Files\\Python313\\DLLs\\select.pyd', 'EXTENSION'),
+  ('_overlapped.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\_overlapped.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd', 'C:\\Program Files\\Python313\\DLLs\\_ssl.pyd', 'EXTENSION'),
+  ('_queue.pyd', 'C:\\Program Files\\Python313\\DLLs\\_queue.pyd', 'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_multiprocessing.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\_multiprocessing.pyd',
+   'EXTENSION'),
+  ('pyexpat.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\pyexpat.pyd',
+   'EXTENSION'),
+  ('_asyncio.pyd',
+   'C:\\Program Files\\Python313\\DLLs\\_asyncio.pyd',
+   'EXTENSION'),
+  ('_wmi.pyd', 'C:\\Program Files\\Python313\\DLLs\\_wmi.pyd', 'EXTENSION'),
+  ('markupsafe\\_speedups.cp313-win_amd64.pyd',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\markupsafe\\_speedups.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('_cffi_backend.cp313-win_amd64.pyd',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\_cffi_backend.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('81d243bd2c585b0f4821__mypyc.cp313-win_amd64.pyd',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\81d243bd2c585b0f4821__mypyc.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\cd.cp313-win_amd64.pyd',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\charset_normalizer\\cd.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\md.cp313-win_amd64.pyd',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\charset_normalizer\\md.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('websockets\\speedups.cp313-win_amd64.pyd',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\websockets\\speedups.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('_uuid.pyd', 'C:\\Program Files\\Python313\\DLLs\\_uuid.pyd', 'EXTENSION'),
+  ('VCRUNTIME140.dll',
+   'C:\\Program Files\\Python313\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('libcrypto-3.dll',
+   'C:\\Program Files\\Python313\\DLLs\\libcrypto-3.dll',
+   'BINARY'),
+  ('libssl-3.dll',
+   'C:\\Program Files\\Python313\\DLLs\\libssl-3.dll',
+   'BINARY'),
+  ('libffi-8.dll',
+   'C:\\Program Files\\Python313\\DLLs\\libffi-8.dll',
+   'BINARY'),
+  ('VCRUNTIME140_1.dll',
+   'C:\\Program Files\\Python313\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('HumanCursor-1.1.5.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\HumanCursor-1.1.5.dist-info\\INSTALLER',
+   'DATA'),
+  ('HumanCursor-1.1.5.dist-info\\LICENSE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\HumanCursor-1.1.5.dist-info\\LICENSE',
+   'DATA'),
+  ('HumanCursor-1.1.5.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\HumanCursor-1.1.5.dist-info\\METADATA',
+   'DATA'),
+  ('HumanCursor-1.1.5.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\HumanCursor-1.1.5.dist-info\\RECORD',
+   'DATA'),
+  ('HumanCursor-1.1.5.dist-info\\REQUESTED',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\HumanCursor-1.1.5.dist-info\\REQUESTED',
+   'DATA'),
+  ('HumanCursor-1.1.5.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\HumanCursor-1.1.5.dist-info\\WHEEL',
+   'DATA'),
+  ('HumanCursor-1.1.5.dist-info\\top_level.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\HumanCursor-1.1.5.dist-info\\top_level.txt',
+   'DATA'),
+  ('beautifulsoup4-4.14.3.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\beautifulsoup4-4.14.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('beautifulsoup4-4.14.3.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\beautifulsoup4-4.14.3.dist-info\\METADATA',
+   'DATA'),
+  ('beautifulsoup4-4.14.3.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\beautifulsoup4-4.14.3.dist-info\\RECORD',
+   'DATA'),
+  ('beautifulsoup4-4.14.3.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\beautifulsoup4-4.14.3.dist-info\\WHEEL',
+   'DATA'),
+  ('beautifulsoup4-4.14.3.dist-info\\licenses\\AUTHORS',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\beautifulsoup4-4.14.3.dist-info\\licenses\\AUTHORS',
+   'DATA'),
+  ('beautifulsoup4-4.14.3.dist-info\\licenses\\LICENSE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\beautifulsoup4-4.14.3.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('bs4\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\__init__.py',
+   'DATA'),
+  ('bs4\\_deprecation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\_deprecation.py',
+   'DATA'),
+  ('bs4\\_typing.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\_typing.py',
+   'DATA'),
+  ('bs4\\_warnings.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\_warnings.py',
+   'DATA'),
+  ('bs4\\builder\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\builder\\__init__.py',
+   'DATA'),
+  ('bs4\\builder\\_html5lib.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\builder\\_html5lib.py',
+   'DATA'),
+  ('bs4\\builder\\_htmlparser.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\builder\\_htmlparser.py',
+   'DATA'),
+  ('bs4\\builder\\_lxml.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\builder\\_lxml.py',
+   'DATA'),
+  ('bs4\\css.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\css.py',
+   'DATA'),
+  ('bs4\\dammit.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\dammit.py',
+   'DATA'),
+  ('bs4\\diagnose.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\diagnose.py',
+   'DATA'),
+  ('bs4\\element.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\element.py',
+   'DATA'),
+  ('bs4\\exceptions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\exceptions.py',
+   'DATA'),
+  ('bs4\\filter.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\filter.py',
+   'DATA'),
+  ('bs4\\formatter.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\formatter.py',
+   'DATA'),
+  ('bs4\\py.typed',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\bs4\\py.typed',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\METADATA',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\RECORD',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\REQUESTED',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\REQUESTED',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\WHEEL',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\entry_points.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\entry_points.txt',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\licenses\\LICENSE.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('flask\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\__init__.py',
+   'DATA'),
+  ('flask\\__main__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\__main__.py',
+   'DATA'),
+  ('flask\\app.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\app.py',
+   'DATA'),
+  ('flask\\blueprints.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\blueprints.py',
+   'DATA'),
+  ('flask\\cli.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\cli.py',
+   'DATA'),
+  ('flask\\config.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\config.py',
+   'DATA'),
+  ('flask\\ctx.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\ctx.py',
+   'DATA'),
+  ('flask\\debughelpers.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\debughelpers.py',
+   'DATA'),
+  ('flask\\globals.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\globals.py',
+   'DATA'),
+  ('flask\\helpers.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\helpers.py',
+   'DATA'),
+  ('flask\\json\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\json\\__init__.py',
+   'DATA'),
+  ('flask\\json\\provider.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\json\\provider.py',
+   'DATA'),
+  ('flask\\json\\tag.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\json\\tag.py',
+   'DATA'),
+  ('flask\\logging.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\logging.py',
+   'DATA'),
+  ('flask\\py.typed',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\py.typed',
+   'DATA'),
+  ('flask\\sansio\\README.md',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\sansio\\README.md',
+   'DATA'),
+  ('flask\\sansio\\app.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\sansio\\app.py',
+   'DATA'),
+  ('flask\\sansio\\blueprints.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\sansio\\blueprints.py',
+   'DATA'),
+  ('flask\\sansio\\scaffold.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\sansio\\scaffold.py',
+   'DATA'),
+  ('flask\\sessions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\sessions.py',
+   'DATA'),
+  ('flask\\signals.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\signals.py',
+   'DATA'),
+  ('flask\\templating.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\templating.py',
+   'DATA'),
+  ('flask\\testing.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\testing.py',
+   'DATA'),
+  ('flask\\typing.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\typing.py',
+   'DATA'),
+  ('flask\\views.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\views.py',
+   'DATA'),
+  ('flask\\wrappers.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\flask\\wrappers.py',
+   'DATA'),
+  ('humancursor\\HCScripter\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\HCScripter\\__init__.py',
+   'DATA'),
+  ('humancursor\\HCScripter\\gui.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\HCScripter\\gui.py',
+   'DATA'),
+  ('humancursor\\HCScripter\\launch.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\HCScripter\\launch.py',
+   'DATA'),
+  ('humancursor\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\__init__.py',
+   'DATA'),
+  ('humancursor\\system_cursor.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\system_cursor.py',
+   'DATA'),
+  ('humancursor\\test\\system.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\test\\system.py',
+   'DATA'),
+  ('humancursor\\test\\web.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\test\\web.py',
+   'DATA'),
+  ('humancursor\\utilities\\calculate_and_randomize.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\utilities\\calculate_and_randomize.py',
+   'DATA'),
+  ('humancursor\\utilities\\human_curve_generator.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\utilities\\human_curve_generator.py',
+   'DATA'),
+  ('humancursor\\utilities\\web_adjuster.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\utilities\\web_adjuster.py',
+   'DATA'),
+  ('humancursor\\web_cursor.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\humancursor\\web_cursor.py',
+   'DATA'),
+  ('linkd.py', 'C:\\Users\\PlexCube\\Downloads\\linked in\\linkd.py', 'DATA'),
+  ('selenium-4.41.0.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium-4.41.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('selenium-4.41.0.dist-info\\LICENSE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium-4.41.0.dist-info\\LICENSE',
+   'DATA'),
+  ('selenium-4.41.0.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium-4.41.0.dist-info\\METADATA',
+   'DATA'),
+  ('selenium-4.41.0.dist-info\\NOTICE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium-4.41.0.dist-info\\NOTICE',
+   'DATA'),
+  ('selenium-4.41.0.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium-4.41.0.dist-info\\RECORD',
+   'DATA'),
+  ('selenium-4.41.0.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium-4.41.0.dist-info\\WHEEL',
+   'DATA'),
+  ('selenium\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\__init__.py',
+   'DATA'),
+  ('selenium\\common\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\common\\__init__.py',
+   'DATA'),
+  ('selenium\\common\\exceptions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\common\\exceptions.py',
+   'DATA'),
+  ('selenium\\py.typed',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\py.typed',
+   'DATA'),
+  ('selenium\\webdriver\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\chrome\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chrome\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\chrome\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chrome\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\chrome\\remote_connection.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chrome\\remote_connection.py',
+   'DATA'),
+  ('selenium\\webdriver\\chrome\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chrome\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\chrome\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chrome\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\chromium\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chromium\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\chromium\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chromium\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\chromium\\remote_connection.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chromium\\remote_connection.py',
+   'DATA'),
+  ('selenium\\webdriver\\chromium\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chromium\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\chromium\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\chromium\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\action_chains.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\action_chains.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\action_builder.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\action_builder.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\input_device.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\input_device.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\interaction.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\interaction.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\key_actions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\key_actions.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\key_input.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\key_input.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\mouse_button.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\mouse_button.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\pointer_actions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\pointer_actions.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\pointer_input.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\pointer_input.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\wheel_actions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\wheel_actions.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\actions\\wheel_input.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\actions\\wheel_input.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\alert.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\alert.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\browser.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\browser.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\browsing_context.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\browsing_context.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\cdp.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\cdp.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\common.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\common.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\console.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\console.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\emulation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\emulation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\input.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\input.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\log.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\log.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\network.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\network.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\permissions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\permissions.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\script.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\script.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\session.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\session.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\bidi\\webextension.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\bidi\\webextension.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\by.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\by.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\desired_capabilities.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\desired_capabilities.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\accessibility.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\accessibility.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\animation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\animation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\audits.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\audits.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\autofill.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\autofill.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\background_service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\background_service.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\bluetooth_emulation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\bluetooth_emulation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\browser.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\browser.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\cache_storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\cache_storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\cast.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\cast.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\console.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\console.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\css.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\css.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\debugger.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\debugger.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\device_access.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\device_access.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\device_orientation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\device_orientation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\dom.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\dom.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\dom_debugger.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\dom_debugger.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\dom_snapshot.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\dom_snapshot.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\dom_storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\dom_storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\emulation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\emulation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\event_breakpoints.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\event_breakpoints.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\extensions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\extensions.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\fed_cm.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\fed_cm.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\fetch.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\fetch.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\file_system.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\file_system.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\headless_experimental.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\headless_experimental.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\heap_profiler.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\heap_profiler.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\indexed_db.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\indexed_db.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\input_.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\input_.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\inspector.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\inspector.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\io.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\io.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\layer_tree.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\layer_tree.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\log.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\log.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\media.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\media.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\memory.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\memory.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\network.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\network.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\overlay.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\overlay.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\page.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\page.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\performance.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\performance.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\performance_timeline.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\performance_timeline.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\preload.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\preload.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\profiler.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\profiler.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\pwa.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\pwa.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\py.typed',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\py.typed',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\runtime.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\runtime.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\schema.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\schema.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\security.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\security.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\service_worker.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\service_worker.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\system_info.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\system_info.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\target.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\target.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\tethering.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\tethering.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\tracing.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\tracing.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\util.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\util.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\web_audio.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\web_audio.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v143\\web_authn.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v143\\web_authn.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\accessibility.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\accessibility.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\animation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\animation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\audits.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\audits.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\autofill.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\autofill.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\background_service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\background_service.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\bluetooth_emulation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\bluetooth_emulation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\browser.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\browser.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\cache_storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\cache_storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\cast.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\cast.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\console.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\console.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\css.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\css.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\debugger.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\debugger.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\device_access.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\device_access.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\device_orientation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\device_orientation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\dom.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\dom.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\dom_debugger.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\dom_debugger.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\dom_snapshot.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\dom_snapshot.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\dom_storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\dom_storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\emulation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\emulation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\event_breakpoints.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\event_breakpoints.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\extensions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\extensions.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\fed_cm.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\fed_cm.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\fetch.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\fetch.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\file_system.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\file_system.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\headless_experimental.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\headless_experimental.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\heap_profiler.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\heap_profiler.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\indexed_db.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\indexed_db.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\input_.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\input_.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\inspector.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\inspector.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\io.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\io.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\layer_tree.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\layer_tree.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\log.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\log.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\media.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\media.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\memory.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\memory.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\network.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\network.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\overlay.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\overlay.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\page.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\page.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\performance.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\performance.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\performance_timeline.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\performance_timeline.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\preload.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\preload.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\profiler.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\profiler.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\pwa.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\pwa.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\py.typed',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\py.typed',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\runtime.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\runtime.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\schema.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\schema.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\security.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\security.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\service_worker.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\service_worker.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\system_info.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\system_info.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\target.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\target.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\tethering.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\tethering.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\tracing.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\tracing.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\util.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\util.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\web_audio.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\web_audio.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v144\\web_authn.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v144\\web_authn.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\accessibility.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\accessibility.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\animation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\animation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\audits.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\audits.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\autofill.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\autofill.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\background_service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\background_service.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\bluetooth_emulation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\bluetooth_emulation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\browser.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\browser.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\cache_storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\cache_storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\cast.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\cast.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\console.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\console.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\css.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\css.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\debugger.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\debugger.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\device_access.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\device_access.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\device_orientation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\device_orientation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\dom.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\dom.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\dom_debugger.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\dom_debugger.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\dom_snapshot.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\dom_snapshot.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\dom_storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\dom_storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\emulation.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\emulation.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\event_breakpoints.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\event_breakpoints.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\extensions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\extensions.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\fed_cm.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\fed_cm.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\fetch.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\fetch.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\file_system.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\file_system.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\headless_experimental.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\headless_experimental.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\heap_profiler.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\heap_profiler.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\indexed_db.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\indexed_db.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\input_.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\input_.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\inspector.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\inspector.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\io.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\io.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\layer_tree.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\layer_tree.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\log.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\log.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\media.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\media.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\memory.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\memory.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\network.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\network.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\overlay.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\overlay.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\page.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\page.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\performance.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\performance.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\performance_timeline.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\performance_timeline.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\preload.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\preload.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\profiler.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\profiler.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\pwa.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\pwa.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\py.typed',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\py.typed',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\runtime.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\runtime.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\schema.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\schema.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\security.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\security.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\service_worker.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\service_worker.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\storage.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\storage.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\system_info.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\system_info.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\target.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\target.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\tethering.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\tethering.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\tracing.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\tracing.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\util.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\util.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\web_audio.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\web_audio.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\devtools\\v145\\web_authn.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\devtools\\v145\\web_authn.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\driver_finder.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\driver_finder.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\fedcm\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\fedcm\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\fedcm\\account.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\fedcm\\account.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\fedcm\\dialog.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\fedcm\\dialog.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\keys.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\keys.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\linux\\selenium-manager',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\linux\\selenium-manager',
+   'DATA'),
+  ('selenium\\webdriver\\common\\log.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\log.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\macos\\selenium-manager',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\macos\\selenium-manager',
+   'DATA'),
+  ('selenium\\webdriver\\common\\mutation-listener.js',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\mutation-listener.js',
+   'DATA'),
+  ('selenium\\webdriver\\common\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\print_page_options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\print_page_options.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\proxy.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\proxy.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\selenium_manager.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\selenium_manager.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\timeouts.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\timeouts.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\utils.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\utils.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\virtual_authenticator.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\virtual_authenticator.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\common\\window.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\common\\window.py',
+   'DATA'),
+  ('selenium\\webdriver\\edge\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\edge\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\edge\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\edge\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\edge\\remote_connection.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\edge\\remote_connection.py',
+   'DATA'),
+  ('selenium\\webdriver\\edge\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\edge\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\edge\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\edge\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\firefox\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\firefox\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\firefox\\firefox_profile.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\firefox\\firefox_profile.py',
+   'DATA'),
+  ('selenium\\webdriver\\firefox\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\firefox\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\firefox\\remote_connection.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\firefox\\remote_connection.py',
+   'DATA'),
+  ('selenium\\webdriver\\firefox\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\firefox\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\firefox\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\firefox\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\firefox\\webdriver_prefs.json',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\firefox\\webdriver_prefs.json',
+   'DATA'),
+  ('selenium\\webdriver\\ie\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\ie\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\ie\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\ie\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\ie\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\ie\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\ie\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\ie\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\bidi_connection.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\bidi_connection.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\client_config.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\client_config.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\command.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\command.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\errorhandler.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\fedcm.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\fedcm.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\file_detector.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\file_detector.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\findElements.js',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\findElements.js',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\getAttribute.js',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\getAttribute.js',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\isDisplayed.js',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\isDisplayed.js',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\locator_converter.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\locator_converter.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\mobile.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\mobile.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\remote_connection.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\remote_connection.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\script_key.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\script_key.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\server.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\server.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\shadowroot.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\shadowroot.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\switch_to.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\switch_to.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\utils.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\utils.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\webelement.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py',
+   'DATA'),
+  ('selenium\\webdriver\\remote\\websocket_connection.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\remote\\websocket_connection.py',
+   'DATA'),
+  ('selenium\\webdriver\\safari\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\safari\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\safari\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\safari\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\safari\\permissions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\safari\\permissions.py',
+   'DATA'),
+  ('selenium\\webdriver\\safari\\remote_connection.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\safari\\remote_connection.py',
+   'DATA'),
+  ('selenium\\webdriver\\safari\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\safari\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\safari\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\safari\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\abstract_event_listener.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\abstract_event_listener.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\color.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\color.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\event_firing_webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\event_firing_webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\events.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\events.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\expected_conditions.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\expected_conditions.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\relative_locator.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\relative_locator.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\select.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\select.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\ui.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\ui.py',
+   'DATA'),
+  ('selenium\\webdriver\\support\\wait.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\support\\wait.py',
+   'DATA'),
+  ('selenium\\webdriver\\webkitgtk\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\webkitgtk\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\webkitgtk\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\webkitgtk\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\webkitgtk\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\webkitgtk\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\webkitgtk\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\webkitgtk\\webdriver.py',
+   'DATA'),
+  ('selenium\\webdriver\\wpewebkit\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\wpewebkit\\__init__.py',
+   'DATA'),
+  ('selenium\\webdriver\\wpewebkit\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\wpewebkit\\options.py',
+   'DATA'),
+  ('selenium\\webdriver\\wpewebkit\\service.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\wpewebkit\\service.py',
+   'DATA'),
+  ('selenium\\webdriver\\wpewebkit\\webdriver.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\selenium\\webdriver\\wpewebkit\\webdriver.py',
+   'DATA'),
+  ('static\\app.js',
+   'C:\\Users\\PlexCube\\Downloads\\linked in\\static\\app.js',
+   'DATA'),
+  ('templates\\base.html',
+   'C:\\Users\\PlexCube\\Downloads\\linked in\\templates\\base.html',
+   'DATA'),
+  ('templates\\index.html',
+   'C:\\Users\\PlexCube\\Downloads\\linked in\\templates\\index.html',
+   'DATA'),
+  ('templates\\view_results.html',
+   'C:\\Users\\PlexCube\\Downloads\\linked in\\templates\\view_results.html',
+   'DATA'),
+  ('undetected_chromedriver-3.5.5.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver-3.5.5.dist-info\\INSTALLER',
+   'DATA'),
+  ('undetected_chromedriver-3.5.5.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver-3.5.5.dist-info\\METADATA',
+   'DATA'),
+  ('undetected_chromedriver-3.5.5.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver-3.5.5.dist-info\\RECORD',
+   'DATA'),
+  ('undetected_chromedriver-3.5.5.dist-info\\REQUESTED',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver-3.5.5.dist-info\\REQUESTED',
+   'DATA'),
+  ('undetected_chromedriver-3.5.5.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver-3.5.5.dist-info\\WHEEL',
+   'DATA'),
+  ('undetected_chromedriver-3.5.5.dist-info\\licenses\\LICENSE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver-3.5.5.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('undetected_chromedriver-3.5.5.dist-info\\top_level.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver-3.5.5.dist-info\\top_level.txt',
+   'DATA'),
+  ('undetected_chromedriver\\__init__.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver\\__init__.py',
+   'DATA'),
+  ('undetected_chromedriver\\cdp.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver\\cdp.py',
+   'DATA'),
+  ('undetected_chromedriver\\devtool.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver\\devtool.py',
+   'DATA'),
+  ('undetected_chromedriver\\dprocess.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver\\dprocess.py',
+   'DATA'),
+  ('undetected_chromedriver\\options.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver\\options.py',
+   'DATA'),
+  ('undetected_chromedriver\\patcher.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver\\patcher.py',
+   'DATA'),
+  ('undetected_chromedriver\\reactor.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver\\reactor.py',
+   'DATA'),
+  ('undetected_chromedriver\\webelement.py',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\undetected_chromedriver\\webelement.py',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\REQUESTED',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\REQUESTED',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\top_level.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\top_level.txt',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\RECORD',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\METADATA',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\WHEEL',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\licenses\\LICENSE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('setuptools\\_vendor\\jaraco\\text\\Lorem ipsum.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\text\\Lorem '
+   'ipsum.txt',
+   'DATA'),
+  ('certifi\\cacert.pem',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\certifi\\cacert.pem',
+   'DATA'),
+  ('certifi\\py.typed',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\certifi\\py.typed',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\entry_points.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\entry_points.txt',
+   'DATA'),
+  ('click-8.3.2.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\click-8.3.2.dist-info\\METADATA',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\RECORD',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\RECORD',
+   'DATA'),
+  ('click-8.3.2.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\click-8.3.2.dist-info\\RECORD',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\RECORD',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\top_level.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\top_level.txt',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\licenses\\LICENSE.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\licenses\\LICENSE.APACHE2',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\licenses\\LICENSE.APACHE2',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\WHEEL',
+   'DATA'),
+  ('websockets-16.0.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\websockets-16.0.dist-info\\METADATA',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\METADATA',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('click-8.3.2.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\click-8.3.2.dist-info\\WHEEL',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\licenses\\LICENSE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('websockets-16.0.dist-info\\entry_points.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\websockets-16.0.dist-info\\entry_points.txt',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\WHEEL',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\METADATA',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\WHEEL',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\INSTALLER',
+   'DATA'),
+  ('attrs-25.4.0.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\attrs-25.4.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('attrs-25.4.0.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\attrs-25.4.0.dist-info\\RECORD',
+   'DATA'),
+  ('attrs-25.4.0.dist-info\\licenses\\LICENSE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\attrs-25.4.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\WHEEL',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\LICENSE.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\LICENSE.txt',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\top_level.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\top_level.txt',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\licenses\\LICENSE.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\licenses\\LICENSE.MIT',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\licenses\\LICENSE.MIT',
+   'DATA'),
+  ('click-8.3.2.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\click-8.3.2.dist-info\\INSTALLER',
+   'DATA'),
+  ('websockets-16.0.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\websockets-16.0.dist-info\\WHEEL',
+   'DATA'),
+  ('attrs-25.4.0.dist-info\\WHEEL',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\attrs-25.4.0.dist-info\\WHEEL',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\RECORD',
+   'DATA'),
+  ('attrs-25.4.0.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\attrs-25.4.0.dist-info\\METADATA',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('websockets-16.0.dist-info\\top_level.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\websockets-16.0.dist-info\\top_level.txt',
+   'DATA'),
+  ('websockets-16.0.dist-info\\INSTALLER',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\websockets-16.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('click-8.3.2.dist-info\\licenses\\LICENSE.txt',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\click-8.3.2.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\METADATA',
+   'DATA'),
+  ('websockets-16.0.dist-info\\RECORD',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\websockets-16.0.dist-info\\RECORD',
+   'DATA'),
+  ('websockets-16.0.dist-info\\licenses\\LICENSE',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\websockets-16.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\METADATA',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\METADATA',
+   'DATA'),
+  ('base_library.zip',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\build\\LinkedIn_Scraper\\base_library.zip',
+   'DATA')],)

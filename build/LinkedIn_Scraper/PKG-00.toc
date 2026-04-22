@@ -1,0 +1,65 @@
+('C:\\Users\\PlexCube\\Downloads\\linked '
+ 'in\\build\\LinkedIn_Scraper\\LinkedIn_Scraper.pkg',
+ {'BINARY': True,
+  'DATA': True,
+  'EXECUTABLE': True,
+  'EXTENSION': True,
+  'PYMODULE': True,
+  'PYSOURCE': True,
+  'PYZ': False,
+  'SPLASH': True,
+  'SYMLINK': False},
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\build\\LinkedIn_Scraper\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\build\\LinkedIn_Scraper\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\build\\LinkedIn_Scraper\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\build\\LinkedIn_Scraper\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\build\\LinkedIn_Scraper\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\build\\LinkedIn_Scraper\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'c:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_setuptools',
+   'C:\\Users\\PlexCube\\Downloads\\linked '
+   'in\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
+   'PYSOURCE'),
+  ('app', 'C:\\Users\\PlexCube\\Downloads\\linked in\\app.py', 'PYSOURCE')],
+ 'python313.dll',
+ True,
+ False,
+ False,
+ [],
+ None,
+ None,
+ None)

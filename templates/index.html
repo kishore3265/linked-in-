@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — LinkedIn Scraper{% endblock %}
+
+{% block content %}
+
+<!-- ── Cookie Manager ────────────────────────────────────────────────── -->
+<div class="card mb-4" id="cookieCard">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <span>
+      <i class="bi bi-key-fill me-1
+        {% if cookie_detail.status == 'ok' %}text-success
+        {% elif cookie_detail.status == 'partial' %}text-warning
+        {% else %}text-danger{% endif %}
+      "></i>
+      LinkedIn Cookies
+    </span>
+    <!-- Live status badge -->
+    <span id="cookieStatusBadge">
+      {% if cookie_detail.status == 'ok' %}
+        <span class="badge bg-success"><i class="bi bi-shield-check me-1"></i>Valid</span>
+      {% elif cookie_detail.status == 'partial' %}
+        <span class="badge bg-warning text-dark"><i class="bi bi-shield-exclamation me-1"></i>Partial</span>
+      {% else %}
+        <span class="badge bg-danger"><i class="bi bi-shield-x me-1"></i>{{ cookie_detail.status | capitalize }}</span>
+      {% endif %}
+    </span>
+  </div>
+
+  <div class="card-body">
+    <!-- Status message -->
+    <p id="cookieMsg" class="mb-3 small
+      {% if cookie_detail.status == 'ok' %}text-success
+      {% elif cookie_detail.status == 'partial' %}text-warning
+      {% else %}text-danger{% endif %}
+    ">
+      <i class="bi bi-info-circle me-1"></i> {{ cookie_detail.message }}
+      {% if cookie_detail.updated %}
+        <span class="text-muted ms-2">· Last updated: {{ cookie_detail.updated }}</span>
+      {% endif %}
+    </p>
+
+    <!-- Cookie checkboxes (read-only indicators) -->
+    {% if cookie_detail.count > 0 %}
+    <div class="d-flex flex-wrap gap-3 mb-3">
+      <span class="small {{ 'text-success' if cookie_detail.has_li_at else 'text-danger' }}">
+        <i class="bi bi-{{ 'check-circle-fill' if cookie_detail.has_li_at else 'x-circle-fill' }} me-1"></i>
+        <code>li_at</code> (LinkedIn auth)
+      </span>
+      <span class="small {{ 'text-success' if cookie_detail.has_li_a else 'text-danger' }}">
+        <i class="bi bi-{{ 'check-circle-fill' if cookie_detail.has_li_a else 'x-circle-fill' }} me-1"></i>
+        <code>li_a</code> (Sales Navigator)
+      </span>
+      <span class="small {{ 'text-success' if cookie_detail.has_li_ep else 'text-warning' }}">
+        <i class="bi bi-{{ 'check-circle-fill' if cookie_detail.has_li_ep else 'dash-circle-fill' }} me-1"></i>
+        <code>li_ep_auth_context</code> (Sales Nav auth)
+      </span>
+      <span class="text-muted small ms-auto">{{ cookie_detail.count }} cookies loaded</span>
+    </div>
+    {% endif %}
+
+    <!-- Alert for upload result -->
+    <div id="cookieAlert" class="alert d-none mb-3" role="alert"></div>
+
+    <!-- Two methods side by side on desktop -->
+    <div class="row g-3">
+
+      <!-- Method 1: File upload -->
+      <div class="col-12 col-md-5">
+        <label class="form-label fw-semibold small text-uppercase text-muted">
+          <i class="bi bi-upload me-1"></i>Upload cookies file
+        </label>
+        <input class="form-control form-control-sm" type="file" id="cookieFile"
+               accept=".json,application/json" />
+        <div class="form-text">
+          Export using <strong>EditThisCookie</strong> from the Sales Navigator page,
+          save as <code>.json</code>, then upload here.
+        </div>
+        <button class="btn btn-sm btn-outline-primary mt-2" id="uploadFileBtn">
+          <i class="bi bi-cloud-upload me-1"></i>Upload File
+        </button>
+      </div>
+
+      <div class="col-12 col-md-1 d-flex align-items-center justify-content-center">
+        <span class="text-muted fw-bold">or</span>
+      </div>
+
+      <!-- Method 2: Paste JSON -->
+      <div class="col-12 col-md-6">
+        <label class="form-label fw-semibold small text-uppercase text-muted">
+          <i class="bi bi-clipboard me-1"></i>Paste cookie JSON
+        </label>
+        <textarea class="form-control form-control-sm font-monospace"
+                  id="cookiePaste" rows="4"
+                  placeholder='[{"name":"li_at","value":"..."},{"name":"li_a","value":"..."},...]'
+                  style="font-size:0.75rem; resize:vertical;"></textarea>
+        <button class="btn btn-sm btn-outline-primary mt-2" id="pasteCookieBtn">
+          <i class="bi bi-floppy me-1"></i>Save Pasted Cookies
+        </button>
+      </div>
+
+    </div><!-- /row -->
+
+    <!-- How-to guide (collapsed) -->
+    <div class="mt-3">
+      <a class="small text-muted text-decoration-none" data-bs-toggle="collapse"
+         href="#cookieGuide" role="button">
+        <i class="bi bi-question-circle me-1"></i>How to export cookies from LinkedIn?
+      </a>
+      <div class="collapse mt-2" id="cookieGuide">
+        <ol class="small text-muted mb-0 ps-3">
+          <li>Install the <strong>EditThisCookie</strong> Chrome extension.</li>
+          <li>Open Chrome and log in to <strong>LinkedIn Sales Navigator</strong>.</li>
+          <li>Click the EditThisCookie icon → click the <strong>Export</strong> button (down arrow icon).</li>
+          <li>The cookies are copied to your clipboard as JSON.</li>
+          <li>Paste them into the text box above, or save them as a <code>.json</code> file and upload.</li>
+          <li>Cookies expire — if scraping fails with auth errors, re-export and update here.</li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Start New Scrape ───────────────────────────────────────────────── -->
+<div class="card mb-4">
+  <div class="card-header d-flex align-items-center gap-2">
+    <i class="bi bi-search text-primary"></i> Start New Scrape
+  </div>
+  <div class="card-body">
+
+    <!-- Validation alert (hidden by default) -->
+    <div id="startError" class="alert alert-danger d-none" role="alert"></div>
+
+    <form id="scrapeForm" class="row g-3 align-items-end">
+      <div class="col-12 col-md-8">
+        <label for="scrapeUrl" class="form-label fw-semibold">
+          Sales Navigator Search URL
+        </label>
+        <input type="url" class="form-control" id="scrapeUrl" name="url"
+               placeholder="https://www.linkedin.com/sales/search/people?query=..."
+               required />
+        <div class="form-text">
+          Paste a <strong>Sales Navigator</strong> search URL.
+          Apply your filters first, then copy the URL from the browser bar.
+        </div>
+      </div>
+
+      <div class="col-6 col-md-2">
+        <label for="maxPages" class="form-label fw-semibold">Pages</label>
+        <select class="form-select" id="maxPages" name="max_pages">
+          {% for n in [1, 2, 3, 5, 10, 15, 20, 25, 30] %}
+            <option value="{{ n }}" {% if n == 5 %}selected{% endif %}>{{ n }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-6 col-md-2 d-grid">
+        <button type="submit" class="btn btn-primary" id="startBtn">
+          <i class="bi bi-play-fill me-1"></i> Start
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ── Active Jobs ────────────────────────────────────────────────────── -->
+<div class="card mb-4">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <span><i class="bi bi-activity text-success me-1"></i> Active Jobs</span>
+    <span class="text-muted small" id="lastRefreshed"></span>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0" id="jobsTable">
+        <thead class="table-light">
+          <tr>
+            <th>Job ID</th>
+            <th>URL</th>
+            <th>Pages</th>
+            <th>Status</th>
+            <th>Leads</th>
+            <th>Started</th>
+            <th>Output</th>
+          </tr>
+        </thead>
+        <tbody id="jobsBody">
+          {% if jobs %}
+            {% for job in jobs %}
+            <tr id="job-{{ job.job_id }}">
+              <td><code>{{ job.job_id }}</code></td>
+              <td class="text-truncate" style="max-width:260px;" title="{{ job.url_snippet }}">
+                {{ job.url_snippet }}
+              </td>
+              <td>{{ job.max_pages }}</td>
+              <td>
+                {% if job.status == 'running' %}
+                  <span class="badge bg-primary status-badge"><i class="bi bi-arrow-repeat me-1"></i>Running</span>
+                {% elif job.status == 'done' %}
+                  <span class="badge bg-success status-badge"><i class="bi bi-check-circle me-1"></i>Done</span>
+                {% elif job.status == 'error' %}
+                  <span class="badge bg-danger status-badge"><i class="bi bi-x-circle me-1"></i>Error</span>
+                {% else %}
+                  <span class="badge bg-secondary status-badge"><i class="bi bi-hourglass me-1"></i>Queued</span>
+                {% endif %}
+              </td>
+              <td class="lead-count">{{ job.lead_count }}</td>
+              <td class="text-muted small">{{ job.started }}</td>
+              <td>
+                {% if job.output_file %}
+                  <a href="{{ url_for('download_result', filename=job.output_file) }}"
+                     class="btn btn-sm btn-outline-secondary py-0 px-1">
+                    <i class="bi bi-download"></i>
+                  </a>
+                  <a href="{{ url_for('view_results', filename=job.output_file) }}"
+                     class="btn btn-sm btn-outline-primary py-0 px-1">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          {% else %}
+          <tr id="noJobsRow">
+            <td colspan="7" class="text-center text-muted py-4">
+              No jobs yet. Start a scrape above.
+            </td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ── Saved Results ──────────────────────────────────────────────────── -->
+<div class="card">
+  <div class="card-header">
+    <i class="bi bi-archive text-secondary me-1"></i> Saved Results
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>File</th>
+            <th>Date</th>
+            <th>Leads</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if results %}
+            {% for r in results %}
+            <tr>
+              <td><code class="text-muted" style="font-size:.8rem;">{{ r.filename }}</code></td>
+              <td class="text-muted small">{{ r.modified }}</td>
+              <td><strong>{{ r.lead_count }}</strong></td>
+              <td class="d-flex gap-1">
+                <a href="{{ url_for('view_results', filename=r.filename) }}"
+                   class="btn btn-sm btn-outline-primary">
+                  <i class="bi bi-eye me-1"></i>View
+                </a>
+                <a href="{{ url_for('download_result', filename=r.filename) }}"
+                   class="btn btn-sm btn-outline-secondary">
+                  <i class="bi bi-filetype-json me-1"></i>JSON
+                </a>
+                <a href="{{ url_for('download_csv', filename=r.filename) }}"
+                   class="btn btn-sm btn-outline-success">
+                  <i class="bi bi-filetype-csv me-1"></i>CSV
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          {% else %}
+          <tr>
+            <td colspan="4" class="text-center text-muted py-4">
+              No results yet.
+            </td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}
